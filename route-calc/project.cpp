@@ -15,10 +15,10 @@ Project::~Project()
 
 }
 
-Route Project::get_route(int index)
+Route* Project::get_proute(int index)
 {
 	if (0 <= index && index < this->routes.count())
-		return this->routes[index];
+		return &this->routes[index];
 	return nullptr;
 }
 

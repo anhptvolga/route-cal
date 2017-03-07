@@ -4,6 +4,7 @@
 #include <QDialog>
 #include "ui_coordinate.h"
 #include "route.h"
+#include <QDebug>
 
 class CoordinateDialog : public QDialog
 {

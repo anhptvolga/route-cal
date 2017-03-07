@@ -14,7 +14,9 @@ WMain::WMain(QWidget *parent)
 	connect(ui.bt_add_route, SIGNAL(clicked()), this, SLOT(on_add_route_clicked()));
 	connect(ui.bt_delete_route, SIGNAL(clicked()), this, SLOT(on_del_route_clicked()));
 	connect(ui.bt_rename_route, SIGNAL(clicked()), this, SLOT(on_ren_route_clicked()));
-	
+
+	connect(ui.bt_edit_coordinate, SIGNAL(clicked()), this, SLOT(on_edit_coord()));
+
 	connect(ui.bt_calculate, SIGNAL(clicked()), this, SLOT(on_calc_clicked()));
 
 	connect(ui.bt_save_text, SIGNAL(clicked()), this, SLOT(on_save_file_clicked()));
@@ -35,6 +37,7 @@ void WMain::on_add_project_clicked()
 	if (ok && !name.isEmpty()) 
 	{
 		ui.cb_projects->addItem(name);
+		this->projects.append(Project(name));
 	}
 }
 
@@ -63,6 +66,7 @@ void WMain::on_add_route_clicked()
 	if (ok && !name.isEmpty()) 
 	{
 		ui.cb_routes->addItem(name);
+		this->get_current_project()->add_route(name);
 	}
 }
 
@@ -84,10 +88,46 @@ void WMain::on_ren_route_clicked()
 
 void WMain::on_calc_clicked()
 {
-
+	Route *curr = this->get_current_route();
+	curr->calcuate();
 }
 
 void WMain::on_save_file_clicked()
 {
 
+}
+
+void WMain::on_edit_coord()
+{
+	Route* curroute = this->get_current_route();
+	if (curroute != nullptr)
+	{
+		CoordinateDialog ce(this, curroute);
+		ce.exec();
+	}
+}
+
+Route* WMain::get_current_route()
+{
+	Route *rt = nullptr;
+	int index_route = this->ui.cb_routes->currentIndex();
+	if (index_route != -1)
+	{
+		rt = get_current_project()->get_proute(index_route);
+	}
+	return rt;
+}
+
+Project* WMain::get_current_project()
+{
+	int index_project = this->ui.cb_projects->currentIndex();
+	if (0 <= index_project && index_project < projects.count())
+	{
+		return &this->projects[index_project];
+	} 
+	else
+	{
+		// TODO: Show warning here
+	}
+	return nullptr;
 }

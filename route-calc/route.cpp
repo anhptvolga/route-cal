@@ -27,6 +27,6 @@ void Route::update_points(QVector<Point> pts)
 
 void Route::calcuate()
 {
-
+	
 }
 

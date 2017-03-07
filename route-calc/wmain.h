@@ -2,9 +2,10 @@
 #define WMAIN_H
 
 #include <QtWidgets/QMainWindow>
-#include "ui_wmain.h"
 #include <QtWidgets/QInputDialog>
-
+#include "ui_wmain.h"
+#include "CoordinateDialog.h"
+#include "project.h"
 
 class WMain : public QMainWindow
 {
@@ -23,11 +24,19 @@ public slots:
 	void on_del_route_clicked();
 	void on_ren_route_clicked();
 
+	void on_edit_coord();
+
 	void on_calc_clicked();
 	void on_save_file_clicked();
 
 private:
 	Ui::MainWindow ui;
+
+	QVector<Project> projects;
+
+	Project* get_current_project();
+	Route* get_current_route();
+
 };
 
 #endif // WMAIN_H

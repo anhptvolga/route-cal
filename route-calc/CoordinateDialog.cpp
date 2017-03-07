@@ -29,10 +29,11 @@ void CoordinateDialog::on_finish_clicked()
 	int rows = this->ui.tableWidget->rowCount();
 	for (int i = 0; i < rows; ++i) 
 	{
+		qDebug() <<  this->ui.tableWidget->itemAt(i, 0)->text();
 		pts.append(Point(
-			this->ui.tableWidget->itemAt(i, 0)->text().toDouble(),
-			this->ui.tableWidget->itemAt(i, 1)->text().toDouble(),
-			this->ui.tableWidget->itemAt(i, 2)->text().toDouble()
+			this->ui.tableWidget->item(i, 0)->text().toDouble(),
+			this->ui.tableWidget->item(i, 1)->text().toDouble(),
+			this->ui.tableWidget->item(i, 2)->text().toDouble()
 			));
 	}
 	this->proute->update_points(pts);

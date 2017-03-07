@@ -3,6 +3,8 @@
 
 #include <QObject>
 #include <QVector>
+#include <QFile>
+#include <QTextStream>
 
 typedef struct _POINT {
 	double x;
