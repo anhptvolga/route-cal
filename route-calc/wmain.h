@@ -25,6 +25,7 @@ public slots:
 	void on_ren_route_clicked();
 
 	void on_edit_coord();
+	void on_pt_connection_clicked();
 
 	void on_calc_clicked();
 	void on_save_file_clicked();

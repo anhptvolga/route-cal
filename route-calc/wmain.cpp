@@ -16,6 +16,7 @@ WMain::WMain(QWidget *parent)
 	connect(ui.bt_rename_route, SIGNAL(clicked()), this, SLOT(on_ren_route_clicked()));
 
 	connect(ui.bt_edit_coordinate, SIGNAL(clicked()), this, SLOT(on_edit_coord()));
+	connect(ui.bt_points_connection, SIGNAL(clicked()), this, SLOT(on_pt_connection_clicked()));
 
 	connect(ui.bt_calculate, SIGNAL(clicked()), this, SLOT(on_calc_clicked()));
 
@@ -130,4 +131,27 @@ Project* WMain::get_current_project()
 		// TODO: Show warning here
 	}
 	return nullptr;
+}
+
+void WMain::on_pt_connection_clicked()
+{
+	bool ok;
+	QString name = QInputDialog::getText(this, tr("Enter indexs of points"),
+		tr("Indexs (seperate by \',\'):"), QLineEdit::Normal, "", &ok);
+	// TODO: rename route
+	if (ok && !name.isEmpty()) 
+	{
+		QStringList nums = name.split(",", QString::SkipEmptyParts);
+		QVector<int> indexs;
+		int tmp;
+		for (int i = 0; i < nums.count(); ++i)
+		{
+			tmp = nums[i].toInt();
+			if (!indexs.contains(tmp))
+			{
+				indexs.append(tmp);
+			}
+		}
+		this->get_current_route()->set_free_indexs(indexs);
+	}
 }

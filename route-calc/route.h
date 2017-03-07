@@ -5,14 +5,8 @@
 #include <QVector>
 #include <QFile>
 #include <QTextStream>
-
-typedef struct _POINT {
-	double x;
-	double y;
-	double z;
-	_POINT() { x = y = z = 0; }
-	_POINT(double _x, double _y, double _z) { x = _x; y = _y; z = _z; }
-} Point, Vector;
+#include "point.h"
+#include "vector.h"
 
 class Route
 {
@@ -25,10 +19,14 @@ public:
 
 	QVector<Point> get_points();
 
+	void set_free_indexs(QVector<int> frindexs);
+
 	void calcuate();
+
 	
 private:
 	QVector<Point> points;
+	QVector<int> free_indexs;
 	QString name;
 };
 
