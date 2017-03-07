@@ -3,6 +3,8 @@
 
 #include <QtWidgets/QMainWindow>
 #include "ui_wmain.h"
+#include <QtWidgets/QInputDialog>
+
 
 class WMain : public QMainWindow
 {
