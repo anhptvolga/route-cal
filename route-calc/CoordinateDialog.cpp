@@ -18,9 +18,20 @@ CoordinateDialog::~CoordinateDialog()
 
 void CoordinateDialog::on_add_clicked()
 {
-	int rows = this->ui.tableWidget->rowCount() + 1;
+	int rows = this->ui.tableWidget->rowCount();
 
-	this->ui.tableWidget->setRowCount(rows);
+	this->ui.tableWidget->setRowCount(rows+1);
+	QTableWidgetItem *it = new QTableWidgetItem();
+	it->setTextAlignment(Qt::AlignHCenter|Qt::AlignVCenter|Qt::AlignCenter);
+	this->ui.tableWidget->setItem(rows, 0, it);
+
+	it = new QTableWidgetItem();
+	it->setTextAlignment(Qt::AlignHCenter|Qt::AlignVCenter|Qt::AlignCenter);
+	this->ui.tableWidget->setItem(rows, 1, it);
+
+	it = new QTableWidgetItem();
+	it->setTextAlignment(Qt::AlignHCenter|Qt::AlignVCenter|Qt::AlignCenter);
+	this->ui.tableWidget->setItem(rows, 2, it);
 }
 
 void CoordinateDialog::on_finish_clicked()
