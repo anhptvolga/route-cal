@@ -5,6 +5,8 @@
 #include "ui_coordinate.h"
 #include "route.h"
 #include <QDebug>
+#include <QItemDelegate>
+#include <QLineEdit>
 
 class CoordinateDialog : public QDialog
 {
@@ -22,6 +24,20 @@ public slots:
 private:
 	Ui::CoordinateEditor ui;
 	Route *proute;
+};
+
+class Delegate : public QItemDelegate
+{
+public:
+	QWidget* createEditor(QWidget *parent, const QStyleOptionViewItem & option,
+		const QModelIndex & index) const
+	{
+		QLineEdit *lineEdit = new QLineEdit(parent);
+		// Set validator
+		QDoubleValidator *validator = new QDoubleValidator(lineEdit);
+		lineEdit->setValidator(validator);
+		return lineEdit;
+	}
 };
 
 #endif // COORDINATE_H

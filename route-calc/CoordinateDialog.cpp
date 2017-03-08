@@ -4,6 +4,7 @@ CoordinateDialog::CoordinateDialog(QWidget *parent, Route *prt)
 	: QDialog(parent)
 {
 	ui.setupUi(this);
+	this->ui.tableWidget->setItemDelegate(new Delegate);
 	this->proute = prt;
 
 	connect(ui.bt_add, SIGNAL(clicked()), this, SLOT(on_add_clicked()));
