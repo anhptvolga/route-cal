@@ -38,6 +38,7 @@ void WMain::on_add_project_clicked()
 	if (ok && !name.isEmpty()) 
 	{
 		ui.cb_projects->addItem(name);
+		ui.cb_projects->setCurrentIndex(ui.cb_projects->count()-1);
 		this->projects.append(Project(name));
 	}
 }
@@ -67,6 +68,7 @@ void WMain::on_add_route_clicked()
 	if (ok && !name.isEmpty()) 
 	{
 		ui.cb_routes->addItem(name);
+		ui.cb_routes->setCurrentIndex(ui.cb_routes->count()-1);
 		this->get_current_project()->add_route(name);
 	}
 }
