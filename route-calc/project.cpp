@@ -26,3 +26,11 @@ void Project::add_route(QString name)
 {
 	this->routes.append(Route(name));
 }
+
+QStringList Project::get_routes_name()
+{
+	QStringList res;
+	for (int i = 0; i < routes.count(); ++i)
+		res.append(routes[i].get_name());
+	return res;
+}

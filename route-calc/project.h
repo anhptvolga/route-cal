@@ -17,6 +17,7 @@ public:
 	void rename_route(QString newnName);
 	void delete_route(QString name);
 
+	QStringList get_routes_name();
 	Route* get_proute(int index);
 
 private:
