@@ -27,7 +27,9 @@ public:
 	void set_free_indexs(QVector<int> frindexs);
 
 	void calcuate();
+	bool can_calculate();
 
+	void set_name(QString value);
 	QString get_name();
 	
 private:

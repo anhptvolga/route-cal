@@ -164,7 +164,14 @@ void WMain::on_ren_route_clicked()
 void WMain::on_calc_clicked()
 {
 	Route *curr = this->get_current_route();
-	curr->calcuate();
+	if (curr != nullptr && curr->can_calculate())
+	{
+		curr->calcuate();
+	}
+	else
+	{
+		QMessageBox::warning(this, tr("Can not calculate"), tr("Please checking route again."));
+	}
 }
 
 void WMain::on_save_file_clicked()
@@ -186,9 +193,10 @@ Route* WMain::get_current_route()
 {
 	Route *rt = nullptr;
 	int index_route = this->ui.cb_routes->currentIndex();
-	if (index_route != -1)
+	Project * prj = get_current_project();
+	if (prj != nullptr && index_route != -1)
 	{
-		rt = get_current_project()->get_proute(index_route);
+		rt = prj->get_proute(index_route);
 	}
 	return rt;
 }

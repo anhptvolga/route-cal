@@ -214,11 +214,20 @@ void Route::set_free_indexs(QVector<int> frindexs)
 	this->free_indexs = frindexs;
 }
 
+void Route::set_name(QString value)
+{
+	this->name = value;
+}
+
 QString Route::get_name()
 {
 	return this->name;
 }
 
+bool Route::can_calculate()
+{
+	return  this->points.count() > 2 && !this->free_indexs.isEmpty();
+}
 
 /*
 QFile file("out.txt");
