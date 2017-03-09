@@ -45,3 +45,23 @@ double Setting::limit_angle()
 {
 	return value_limit_angle;
 }
+
+void Setting::set_author(QString name)
+{
+	value_author = name;
+}
+
+QString Setting::author()
+{
+	return value_author;
+}
+
+void Setting::set_language(QString lang)
+{
+	value_language = lang;
+}
+
+QString Setting::language()
+{
+	return value_language;
+}
