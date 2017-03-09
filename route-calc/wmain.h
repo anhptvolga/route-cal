@@ -30,6 +30,8 @@ public slots:
 	void on_calc_clicked();
 	void on_save_file_clicked();
 
+	void on_current_project_changed();
+
 private:
 	Ui::MainWindow ui;
 

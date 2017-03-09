@@ -21,7 +21,8 @@ WMain::WMain(QWidget *parent)
 	connect(ui.bt_calculate, SIGNAL(clicked()), this, SLOT(on_calc_clicked()));
 
 	connect(ui.bt_save_text, SIGNAL(clicked()), this, SLOT(on_save_file_clicked()));
-
+	
+	connect(ui.cb_projects, SIGNAL(currentIndexChanged(int)), this, SLOT(on_current_project_changed()));
 }
 
 WMain::~WMain()
@@ -37,9 +38,9 @@ void WMain::on_add_project_clicked()
 	// TODO: checking repeat name
 	if (ok && !name.isEmpty()) 
 	{
+		this->projects.append(Project(name));
 		ui.cb_projects->addItem(name);
 		ui.cb_projects->setCurrentIndex(ui.cb_projects->count()-1);
-		this->projects.append(Project(name));
 	}
 }
 
@@ -67,9 +68,9 @@ void WMain::on_add_route_clicked()
 	// TODO: checking repeat name
 	if (ok && !name.isEmpty()) 
 	{
+		this->get_current_project()->add_route(name);
 		ui.cb_routes->addItem(name);
 		ui.cb_routes->setCurrentIndex(ui.cb_routes->count()-1);
-		this->get_current_project()->add_route(name);
 	}
 }
 
@@ -156,4 +157,11 @@ void WMain::on_pt_connection_clicked()
 		}
 		this->get_current_route()->set_free_indexs(indexs);
 	}
+}
+
+void WMain::on_current_project_changed()
+{
+	//QStringList rts = ;
+	this->ui.cb_routes->clear();
+	this->ui.cb_routes->addItems(this->get_current_project()->get_routes_name());
 }
