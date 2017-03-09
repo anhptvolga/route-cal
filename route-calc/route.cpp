@@ -1,9 +1,5 @@
 #include "route.h"
 
-double Setting::accuracy;
-double Setting::limit_angle;
-
-
 Route::Route()
 {
 }
@@ -130,15 +126,15 @@ void Route::calcuate()
 			sum_ey += ves[i].get_y();
 			sum_ez += ves[i].get_z();
 		}
-
-		double lmx = sin(-Setting::limit_angle) * sum_ux + (1-cos(Setting::limit_angle))*sum_ex;
-		double lmy = sin(-Setting::limit_angle) * sum_uy + (1-cos(Setting::limit_angle))*sum_ey;
-		double lmz = sin(-Setting::limit_angle) * sum_uz + (1-cos(Setting::limit_angle))*sum_ez;
 		
-		double ulmx = sin(-Setting::limit_angle) * sum_ux + (1-cos(Setting::limit_angle))*sum_ex;
-		double ulmy = sin(-Setting::limit_angle) * sum_uy + (1-cos(Setting::limit_angle))*sum_ey;
-		double ulmz = sin(-Setting::limit_angle) * sum_uz + (1-cos(Setting::limit_angle))*sum_ez;
-
+		double lmx = sin(-Setting::Instance()->limit_angle()) * sum_ux + (1-cos(Setting::Instance()->limit_angle()))*sum_ex;
+		double lmy = sin(-Setting::Instance()->limit_angle()) * sum_uy + (1-cos(Setting::Instance()->limit_angle()))*sum_ey;
+		double lmz = sin(-Setting::Instance()->limit_angle()) * sum_uz + (1-cos(Setting::Instance()->limit_angle()))*sum_ez;
+		
+		double ulmx = sin(-Setting::Instance()->limit_angle()) * sum_ux + (1-cos(Setting::Instance()->limit_angle()))*sum_ex;
+		double ulmy = sin(-Setting::Instance()->limit_angle()) * sum_uy + (1-cos(Setting::Instance()->limit_angle()))*sum_ey;
+		double ulmz = sin(-Setting::Instance()->limit_angle()) * sum_uz + (1-cos(Setting::Instance()->limit_angle()))*sum_ez;
+		
 		double max_sx = max(lmx, ulmx);
 		double max_sy = max(lmx, ulmx);
 		double max_sz = max(lmx, ulmx);
