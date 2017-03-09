@@ -47,7 +47,7 @@ void test1()
 	route.set_free_indexs(free);
 
 	route.calcuate();
-	
+	route.write_detail_to_file("out1.txt");
 }
 
 void test2()
@@ -81,7 +81,7 @@ void test2()
 	route.set_free_indexs(free);
 
 	route.calcuate();
-
+	route.write_detail_to_file("out2.txt");
 }
 
 void test3()
@@ -120,7 +120,7 @@ void test3()
 	route.set_free_indexs(free);
 
 	route.calcuate();
-
+	route.write_detail_to_file("out3.txt");
 }
 
 void test4()
@@ -154,13 +154,16 @@ void test4()
 	route.set_free_indexs(free);
 
 	route.calcuate();
-
+	route.write_detail_to_file("out4.txt");
 }
 
 int main() 
 {
-	Setting::accuracy = 0.02;
-	Setting::limit_angle = 15 * 3.14 / 180;
+	Setting::Instance()->set_accuracy(2);
+	Setting::Instance()->set_limit_angle(15 * 3.14 / 180);
+	test1();
+	test2();
+	test3();
 	test4();
 	// system("pause");
 }
