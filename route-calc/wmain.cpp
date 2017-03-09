@@ -65,15 +65,23 @@ void WMain::on_ren_project_clicked()
 
 void WMain::on_add_route_clicked()
 {
-	bool ok;
-	QString name = QInputDialog::getText(this, tr("Enter new route name"),
-		tr("Name:"), QLineEdit::Normal, "", &ok);
-	// TODO: checking repeat name
-	if (ok && !name.isEmpty()) 
+	Project *cur = this->get_current_project();
+	if (cur != nullptr)
 	{
-		this->get_current_project()->add_route(name);
-		ui.cb_routes->addItem(name);
-		ui.cb_routes->setCurrentIndex(ui.cb_routes->count()-1);
+		bool ok;
+		QString name = QInputDialog::getText(this, tr("Enter new route name"),
+			tr("Name:"), QLineEdit::Normal, "", &ok);
+		// TODO: checking repeat name
+		if (ok && !name.isEmpty()) 
+		{
+			cur->add_route(name);
+			ui.cb_routes->addItem(name);
+			ui.cb_routes->setCurrentIndex(ui.cb_routes->count()-1);	
+		}
+	}
+	else // No project selected
+	{
+		QMessageBox::warning(this, tr("No project"), tr("Please choose project first."));
 	}
 }
 
