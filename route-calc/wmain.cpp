@@ -113,7 +113,27 @@ void WMain::on_add_route_clicked()
 
 void WMain::on_del_route_clicked()
 {
-
+	int index = ui.cb_routes->currentIndex();
+	if (index != -1)
+	{
+		// comfirm
+		QMessageBox::StandardButton ok =  QMessageBox::question(
+			this, "Sure?", "Are you sure?");
+		if (ok == QMessageBox::Yes)
+		{
+			Project * prj = this->get_current_project();
+			if (prj != nullptr)
+			{
+				prj->delete_route(index);
+				ui.cb_routes->removeItem(index);
+			}
+			QMessageBox::information(this, tr("Deleted"), tr("Route deleted."));
+		}
+	}
+	else // No project selected
+	{
+		QMessageBox::warning(this, tr("No route"), tr("No route to delete."));
+	}
 }
 
 void WMain::on_ren_route_clicked()
