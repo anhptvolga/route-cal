@@ -25,6 +25,7 @@ WMain::WMain(QWidget *parent)
 	connect(ui.cb_projects, SIGNAL(currentIndexChanged(int)), this, SLOT(on_current_project_changed()));
 
 	connect(ui.menuSetting, SIGNAL(aboutToShow()), this, SLOT(on_setting_triggered()));
+	connect(ui.menuAbout, SIGNAL(aboutToShow()), this, SLOT(on_about_triggered()));
 }
 
 WMain::~WMain()
@@ -172,4 +173,14 @@ void WMain::on_setting_triggered()
 {
 	SettingDialog st(this);
 	st.exec();
+}
+
+void WMain::on_about_triggered()
+{
+	QMessageBox msgBox;
+	QString about = "About program\n";
+	about += "Program calculates the values of compensations\'s possibilities of pipelines \nVersion: 1.0\nAuthor: Ngo Gia Viet,\
+Postgraduate student of department \'Shipbuilding and Marine Engineering Energy Complexes\', ASTU";
+	msgBox.setText(about);
+	msgBox.exec();
 }

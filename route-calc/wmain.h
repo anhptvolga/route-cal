@@ -3,6 +3,7 @@
 
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QInputDialog>
+#include <QMessageBox>
 #include "ui_wmain.h"
 #include "CoordinateDialog.h"
 #include "project.h"
@@ -34,7 +35,7 @@ public slots:
 	void on_current_project_changed();
 
 	void on_setting_triggered();
-
+	void on_about_triggered();
 private:
 	Ui::MainWindow ui;
 
