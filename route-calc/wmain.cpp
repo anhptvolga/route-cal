@@ -49,7 +49,23 @@ void WMain::on_add_project_clicked()
 
 void WMain::on_del_project_clicked()
 {
-
+	int index = ui.cb_projects->currentIndex();
+	if (index != -1)
+	{
+		// comfirm
+		QMessageBox::StandardButton ok =  QMessageBox::question(
+			this, "Sure?", "Are you sure?");
+		if (ok == QMessageBox::Yes)
+		{
+			ui.cb_projects->removeItem(index);
+			this->projects.remove(index);
+			QMessageBox::information(this, tr("Deleted"), tr("Project deleted."));
+		}
+	}
+	else // No project selected
+	{
+		QMessageBox::warning(this, tr("No project"), tr("Please create project first."));
+	}
 }
 
 void WMain::on_ren_project_clicked()
