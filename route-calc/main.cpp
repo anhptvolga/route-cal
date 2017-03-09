@@ -1,3 +1,5 @@
+#if 1
+
 #include "wmain.h"
 #include <QtWidgets/QApplication>
 
@@ -8,3 +10,5 @@ int main(int argc, char *argv[])
 	w.show();
 	return a.exec();
 }
+
+#endif
