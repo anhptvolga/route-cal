@@ -118,12 +118,26 @@ void WMain::on_del_route_clicked()
 
 void WMain::on_ren_route_clicked()
 {
-	bool ok;
-	QString name = QInputDialog::getText(this, tr("Enter new name"),
-		tr("Name:"), QLineEdit::Normal, "", &ok);
-	// TODO: rename route
-	if (ok && !name.isEmpty()) 
+	int index = ui.cb_routes->currentIndex();
+	if (index != -1)
 	{
+		bool ok;
+		QString name = QInputDialog::getText(this, tr("Enter new name"),
+			tr("Name:"), QLineEdit::Normal, "", &ok);
+		// TODO: rename project
+		if (ok && !name.isEmpty()) 
+		{
+			Project * prj = this->get_current_project();
+			if (prj != nullptr)
+			{
+				prj->get_proute(index)->set_name(name);
+				this->ui.cb_routes->setItemText(ui.cb_routes->currentIndex(), name);
+			}
+		}
+	}
+	else // No project selected
+	{
+		QMessageBox::warning(this, tr("No route"), tr("No route to rename."));
 	}
 }
 
