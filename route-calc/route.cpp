@@ -53,7 +53,7 @@ void Route::calcuate()
 		}
 		// print out vectors
 		for (int i = 0; i < vtsafter.count(); ++i){
-			out << "	" << i << ". " << vtsafter[i].to_string()
+			out << "	" << i+1 << ". " << vtsafter[i].to_string()
 				<< " Points: (" << (i == 0 ? 1 : free_indexs[i-1]) << "; " << (i == 0 ? 2 : free_indexs[i-1]+1) << ") " << endl;
 		}
 		// 4.
@@ -68,7 +68,7 @@ void Route::calcuate()
 				if (vtsafter[i].is_parallel(vtsafter[j]))
 				{
 					
-					out << "Parallel: " << i << ", " << j
+					out << "Parallel: " << i+1 << ", " << j+1
 						<< " Points: (" << (i == 0 ? 1 : free_indexs[i-1]) << "; " << (i == 0 ? 2 : free_indexs[i-1]+1) << ") "
 						<< " Points: (" << (j == 0 ? 1 : free_indexs[j-1]) << "; " << (j == 0 ? 2 : free_indexs[j-1]+1) << ")" << endl;
 					// 5.
@@ -76,8 +76,8 @@ void Route::calcuate()
 					double leni = vtsafter[i].get_len();
 					Vector n1(vtsafter[i].get_x()/leni, vtsafter[i].get_y()/leni, vtsafter[i].get_z()/leni);
 					// 5.b.
-					Vector deltaT( points[free_indexs[j-1]], 
-						i == 0 ? points[0] : points[free_indexs[i-1]-1] );
+					Vector deltaT(i == 0 ? points[0] : points[free_indexs[i-1]-1],
+						points[free_indexs[j-1]]);
 					double L1 = deltaT.get_x()*n1.get_x() + deltaT.get_y()*n1.get_y() + deltaT.get_z()*n1.get_z();					
 					double R1 = sqrt(deltaT.get_x()*deltaT.get_x() + deltaT.get_y()*deltaT.get_y() + deltaT.get_z()*deltaT.get_z() - L1*L1);
 					Vector vR1(deltaT.get_x() - L1 * n1.get_x(),
@@ -95,7 +95,7 @@ void Route::calcuate()
 						out << "	L1 = " << L1 << endl;
 						out << "	R1 = " << R1 << endl;
 						out << "	vector R: " << vR1.to_string() << endl;
-						out << "	vector e: " << vR1.to_string() << endl;
+						out << "	vector e: " << ve1.to_string() << endl;
 						out << "	vector u: " << vu1.to_string() << endl;
 						this->vus.append(vu1);
 						this->vns.append(n1);
@@ -136,11 +136,11 @@ void Route::calcuate()
 		double ulmz = sin(-Setting::Instance()->limit_angle()) * sum_uz + (1-cos(Setting::Instance()->limit_angle()))*sum_ez;
 		
 		double max_sx = max(lmx, ulmx);
-		double max_sy = max(lmx, ulmx);
-		double max_sz = max(lmx, ulmx);
+		double max_sy = max(lmy, ulmy);
+		double max_sz = max(lmz, ulmz);
 		double min_sx = min(lmx, ulmx);
-		double min_sy = min(lmx, ulmx);
-		double min_sz = min(lmx, ulmx);
+		double min_sy = min(lmy, ulmy);
+		double min_sz = min(lmz, ulmz);
 		if (sum_ex != 0)
 		{
 			double t = sum_ux / sum_ex;
@@ -178,24 +178,50 @@ void Route::calcuate()
 		//////////////////////////////////////////////////////////////////////////
 		// 7.
 		out << "---------- 7 ------------" << endl;
-		out << "Ox: "
-			<< "	Field of compensations\' possibilities: from " << min_sx << " to " << max_sx << endl;
+		if (abs(max_sx)-0 < 0.0000000001 && abs(min_sx)-0 < 0.0000000001) 
+		{
+			out << "Ox: "
+				<< "	Field of compensations\' possibilities: 0" << endl;
+		}
+		else
+		{
+			out << "Ox: "
+				<< "	Field of compensations\' possibilities: from " << min_sx << " to " << max_sx << endl;
+		}
+
 		if (100 - min(max_sx, abs(min_sx)) > 0) { 
 			out << "	Note: appoint overdimension: delta_L = " << 100 - min(max_sx, abs(min_sx)) << endl;
 		} else {
 			out << "	Note: don\'t appoint overdimension." << endl;
 		}
+		//----------
+		if (abs(max_sy)-0 < 0.0000000001 && abs(min_sy)-0 < 0.0000000001) 
+		{
+			out << "Oy: "
+				<< "	Field of compensations\' possibilities: 0" << endl;
+		}
+		else
+		{
+			out << "Oy: "
+				<< "	Field of compensations\' possibilities: from " << min_sy << " to " << max_sy << endl;
+		}
 
-		out << "Oy: "
-			<< "	Field of compensations\' possibilities: from " << min_sy << " to " << max_sy << endl;
 		if (100 - min(max_sy, abs(min_sy)) > 0) { 
 			out << "	Note: appoint overdimension: delta_L = " << 100 - min(max_sy, abs(min_sy)) << endl;
 		} else {
 			out << "	Note: don\'t appoint overdimension." << endl;
 		}
-
-		out << "Oz: "
-			<< "	Field of compensations\' possibilities: from " << min_sz << " to " << max_sz << endl;
+		//----------
+		if (abs(max_sz)-0 < 0.0000000001 && abs(min_sz)-0 < 0.0000000001) 
+		{
+			out << "Oz: "
+				<< "	Field of compensations\' possibilities: 0" << endl;
+		}
+		else
+		{
+			out << "Oz: "
+				<< "	Field of compensations\' possibilities: from " << min_sz << " to " << max_sz << endl;
+		}
 		if (100 - min(max_sz, abs(min_sz)) > 0) { 
 			out << "	Note: appoint overdimension: delta_L = " << 100 - min(max_sz, abs(min_sz)) << endl;
 		} else {
@@ -227,6 +253,18 @@ QString Route::get_name()
 bool Route::can_calculate()
 {
 	return  this->points.count() > 2 && !this->free_indexs.isEmpty();
+}
+
+void Route::write_detail_to_file(QString filename)
+{
+	QFile file(filename);
+	if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+		return;
+	QTextStream out(&file);
+
+
+
+	file.close();
 }
 
 /*

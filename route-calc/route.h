@@ -31,7 +31,9 @@ public:
 
 	void set_name(QString value);
 	QString get_name();
-	
+
+	void write_detail_to_file(QString filename);
+
 private:
 	QVector<Point> points;
 	QVector<int> free_indexs;
