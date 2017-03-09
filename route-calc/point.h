@@ -1,4 +1,7 @@
 #pragma once
+#include <QString>
+using namespace std;
+
 class Point
 {
 public:
@@ -8,6 +11,8 @@ public:
 	double get_x();
 	double get_y();
 	double get_z();
+
+	QString to_string();
 
 private:
 	double x;

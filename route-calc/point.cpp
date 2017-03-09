@@ -26,3 +26,12 @@ double Point::get_z()
 {
 	return this->z;
 }
+
+QString Point::to_string()
+{
+	QString res("(");
+	res = res + QString::number(x) + "; " +
+		QString::number(y) + "; " +
+		QString::number(z) + ")";
+	return res;
+}
