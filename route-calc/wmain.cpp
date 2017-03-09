@@ -23,6 +23,8 @@ WMain::WMain(QWidget *parent)
 	connect(ui.bt_save_text, SIGNAL(clicked()), this, SLOT(on_save_file_clicked()));
 	
 	connect(ui.cb_projects, SIGNAL(currentIndexChanged(int)), this, SLOT(on_current_project_changed()));
+
+	connect(ui.menuSetting, SIGNAL(aboutToShow()), this, SLOT(on_setting_triggered()));
 }
 
 WMain::~WMain()
@@ -164,4 +166,10 @@ void WMain::on_current_project_changed()
 	//QStringList rts = ;
 	this->ui.cb_routes->clear();
 	this->ui.cb_routes->addItems(this->get_current_project()->get_routes_name());
+}
+
+void WMain::on_setting_triggered()
+{
+	SettingDialog st(this);
+	st.exec();
 }

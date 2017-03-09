@@ -6,6 +6,7 @@
 #include "ui_wmain.h"
 #include "CoordinateDialog.h"
 #include "project.h"
+#include "settingdialog.h"
 
 class WMain : public QMainWindow
 {
@@ -31,6 +32,8 @@ public slots:
 	void on_save_file_clicked();
 
 	void on_current_project_changed();
+
+	void on_setting_triggered();
 
 private:
 	Ui::MainWindow ui;
