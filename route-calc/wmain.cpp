@@ -54,12 +54,22 @@ void WMain::on_del_project_clicked()
 
 void WMain::on_ren_project_clicked()
 {
-	bool ok;
-	QString name = QInputDialog::getText(this, tr("Enter new name"),
-		tr("Name:"), QLineEdit::Normal, "", &ok);
-	// TODO: rename project
-	if (ok && !name.isEmpty()) 
+	Project *cur = this->get_current_project();
+	if (cur != nullptr)
 	{
+		bool ok;
+		QString name = QInputDialog::getText(this, tr("Enter new name"),
+			tr("Name:"), QLineEdit::Normal, "", &ok);
+		// TODO: rename project
+		if (ok && !name.isEmpty()) 
+		{
+			cur->rename_project(name);
+			this->ui.cb_projects->setItemText(ui.cb_projects->currentIndex(), name);
+		}
+	}
+	else // No project selected
+	{
+		QMessageBox::warning(this, tr("No project"), tr("Please create project first."));
 	}
 }
 

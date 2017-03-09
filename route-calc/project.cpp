@@ -34,3 +34,17 @@ QStringList Project::get_routes_name()
 		res.append(routes[i].get_name());
 	return res;
 }
+
+void Project::delete_route(int index)
+{
+	int count = this->routes.count();
+	if (0 <= index && index < count)
+	{
+		this->routes.remove(index);
+	}
+}
+
+void Project::rename_project(QString newnName)
+{
+	this->name = newnName;
+}
