@@ -12,6 +12,21 @@
 
 #define PI 3.14159265
 
+struct DetailPar
+{
+	int i, j; // parallel pair vector i and j in vtsafter
+	
+
+
+	
+	Vector vn;
+	Vector delta_T;
+	double R;
+	double L;
+	Vector vR;
+	Vector ve;
+	Vector vu;
+};
 
 class Route
 {
@@ -38,9 +53,12 @@ private:
 	QVector<Point> points;
 	QVector<int> free_indexs;
 
-	// For each pair of parallel routes
-	QVector<Vector> vus, ves, vns;
-	QVector<double> vRs;
+	// Results
+	QVector<Vector> vtsafter;	/// List of vector with free points connection.
+	QVector<DetailPar> details;
+	double max_sx, max_sy, max_sz;
+	double min_sx, min_sy, min_sz;
+	bool isHasParallel;
 
 	QString name;
 	int count_parallel;
