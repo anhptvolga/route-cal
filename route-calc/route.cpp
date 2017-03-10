@@ -2,10 +2,12 @@
 
 Route::Route()
 {
+	this->isHasParallel = false;
 }
 
 Route::Route(QString name)
 {
+	this->isHasParallel = false;
 	this->name = name;
 	this->points.append(Point(0,0,0));
 	this->isHasParallel = false;
@@ -296,7 +298,7 @@ void Route::write_detail_to_file(QString filename)
 		//////////////////////////////////////////////////////////////////////////
 		// 7.
 		out << "---------- 7 ------------" << endl;
-		if (abs(this->max_sx)-0 < 0.0000000001 && abs(this->min_sx)-0 < 0.0000000001) 
+		if (abs(this->max_sx) < 0.0000000001 && abs(this->min_sx) < 0.0000000001) 
 		{
 			out << "Ox: "
 				<< "	Field of compensations\' possibilities: 0" << endl;
@@ -313,7 +315,7 @@ void Route::write_detail_to_file(QString filename)
 			out << "	Note: don\'t appoint overdimension." << endl;
 		}
 		//----------
-		if (abs(max_sy)-0 < 0.0000000001 && abs(min_sy)-0 < 0.0000000001) 
+		if (abs(max_sy) < 0.0000000001 && abs(min_sy) < 0.0000000001) 
 		{
 			out << "Oy: "
 				<< "	Field of compensations\' possibilities: 0" << endl;
@@ -330,7 +332,7 @@ void Route::write_detail_to_file(QString filename)
 			out << "	Note: don\'t appoint overdimension." << endl;
 		}
 		//----------
-		if (abs(max_sz)-0 < 0.0000000001 && abs(min_sz)-0 < 0.0000000001) 
+		if (abs(max_sz) < 0.0000000001 && abs(min_sz) < 0.0000000001) 
 		{
 			out << "Oz: "
 				<< "	Field of compensations\' possibilities: 0" << endl;
@@ -347,6 +349,98 @@ void Route::write_detail_to_file(QString filename)
 		}
 	}
 	file.close();
+}
+
+void Route::load_from_stream(QTextStream& in)
+{
+	QString tmp;
+	int size = 0, i = 0;
+	int x=0, y=0, z=0;
+	in >> tmp;
+	this->name = tmp.trimmed();
+	
+	in >> size;
+	this->points.clear();
+	for (i = 0; i < size; ++i)
+	{
+		in >> x >> y >> z;
+		points.append(Point(x, y, z));
+	}
+
+	in >> size;
+	this->free_indexs.clear();
+	for (i = 0; i < size; ++i)
+	{
+		in >> x;
+		free_indexs.append(x);
+	}
+}
+
+void Route::save_to_stream(QTextStream& out)
+{
+	int i;
+	out << this->name << endl;
+	
+	out << this->points.count() << endl;
+	for (i = 0; i < points.count(); ++i)
+		out << points[i].get_x() << " "
+			<< points[i].get_y() << " "
+			<< points[i].get_z() << endl;
+	
+	out << this->free_indexs.count();
+	for (i = 0; i < free_indexs.count(); ++i)
+		out << free_indexs[i] << " ";
+	out << endl;
+}
+
+int Route::count_number_of_straight_sections()
+{
+	return this->points.count() - 1;
+}
+
+int Route::count_parrallel_pairs()
+{
+	int res = 0;
+	for (int i = 0; i < details.count(); ++i)
+	{
+		if (abs(details[i].R) > 0.0000000001) ++res;
+	}
+	return res;
+}
+
+double Route::get_max_sx()
+{
+	return this->max_sx;
+}
+
+double Route::get_max_sy()
+{
+	return this->max_sy;
+}
+
+double Route::get_max_sz()
+{
+	return this->max_sz;
+}
+
+double Route::get_min_sx()
+{
+	return this->min_sx;
+}
+
+double Route::get_min_sy()
+{
+	return this->min_sy;
+}
+
+double Route::get_min_sz()
+{
+	return this->min_sz;
+}
+
+bool Route::is_has_parallel()
+{
+	return this->isHasParallel;
 }
 
 /*

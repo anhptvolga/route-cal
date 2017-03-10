@@ -49,6 +49,22 @@ public:
 
 	void write_detail_to_file(QString filename);
 
+	int count_number_of_straight_sections();
+	int count_parrallel_pairs();
+
+	bool is_has_parallel();
+
+	double get_max_sx();
+	double get_max_sy();
+	double get_max_sz();
+	double get_min_sx();
+	double get_min_sy();
+	double get_min_sz();
+
+	//--- saving and loading methods
+	void load_from_stream(QTextStream& in);
+	void save_to_stream(QTextStream& out);
+
 private:
 	QVector<Point> points;
 	QVector<int> free_indexs;
