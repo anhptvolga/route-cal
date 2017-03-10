@@ -48,3 +48,35 @@ void Project::rename_project(QString newnName)
 {
 	this->name = newnName;
 }
+
+void Project::load_from_stream(QTextStream& in)
+{
+	QString tmp;
+	int size, i;
+	
+	in >> tmp;
+	this->name = tmp.trimmed();
+	
+	in >> size;
+	this->routes.clear();
+	for (i = 0; i < size; ++i)
+	{
+		this->routes.append(Route());
+		this->routes[i].load_from_stream(in);
+	}
+}
+
+void Project::save_to_stream(QTextStream& out)
+{
+	out << name << endl;
+	out << routes.count() << endl;
+	for (int i = 0; i < routes.count(); ++i)
+	{
+		routes[i].save_to_stream(out);
+	}
+}
+
+QString Project::get_name()
+{
+	return this->name;
+}
