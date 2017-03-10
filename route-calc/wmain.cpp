@@ -32,6 +32,8 @@ WMain::WMain(QWidget *parent)
 	connect(ui.actionSave, SIGNAL(triggered(bool)), this, SLOT(on_action_save()));
 	connect(ui.actionImport, SIGNAL(triggered(bool)), this, SLOT(on_action_import()));
 	connect(ui.actionExit, SIGNAL(triggered(bool)), this, SLOT(on_action_exit()));
+
+	connect(ui.actionExit, SIGNAL(triggered()), qApp, SLOT(closeAllWindows()));
 }
 
 WMain::~WMain()
