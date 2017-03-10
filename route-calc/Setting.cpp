@@ -16,6 +16,8 @@ Setting::Setting()
 {
 	value_accuracy = 1;
 	value_limit_angle = 15;
+	value_author = "author";
+	value_language = "en";
 }
 
 Setting::~Setting()

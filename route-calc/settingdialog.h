@@ -3,6 +3,8 @@
 
 #include <QWidget>
 #include "ui_setting.h"
+#include "Setting.h"
+
 
 class SettingDialog : public QDialog
 {
@@ -11,6 +13,9 @@ class SettingDialog : public QDialog
 public:
 	SettingDialog(QWidget *parent);
 	~SettingDialog();
+
+public slots:
+	void on_ok_clicked();
 
 private:
 	Ui::SettingDialog ui;
