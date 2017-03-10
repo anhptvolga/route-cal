@@ -4,7 +4,7 @@ WMain::WMain(QWidget *parent)
 	: QMainWindow(parent)
 {
 	ui.setupUi(this);
-
+	
 	//////////////////////////////////////////////////////////////////////////
 	// connect signals and slots
 	connect(ui.bt_add_project, SIGNAL(clicked()), this, SLOT(on_add_project_clicked()));
@@ -23,9 +23,15 @@ WMain::WMain(QWidget *parent)
 	connect(ui.bt_save_text, SIGNAL(clicked()), this, SLOT(on_save_file_clicked()));
 	
 	connect(ui.cb_projects, SIGNAL(currentIndexChanged(int)), this, SLOT(on_current_project_changed()));
+	connect(ui.cb_routes, SIGNAL(currentIndexChanged(int)), this, SLOT(on_current_route_changed()));
 
 	connect(ui.menuSetting, SIGNAL(aboutToShow()), this, SLOT(on_setting_triggered()));
 	connect(ui.menuAbout, SIGNAL(aboutToShow()), this, SLOT(on_about_triggered()));
+
+	connect(ui.actionOpen, SIGNAL(triggered(bool)), this, SLOT(on_action_open()));
+	connect(ui.actionSave, SIGNAL(triggered(bool)), this, SLOT(on_action_save()));
+	connect(ui.actionImport, SIGNAL(triggered(bool)), this, SLOT(on_action_import()));
+	connect(ui.actionExit, SIGNAL(triggered(bool)), this, SLOT(on_action_exit()));
 }
 
 WMain::~WMain()
@@ -57,8 +63,8 @@ void WMain::on_del_project_clicked()
 			this, "Sure?", "Are you sure?");
 		if (ok == QMessageBox::Yes)
 		{
-			ui.cb_projects->removeItem(index);
 			this->projects.remove(index);
+			ui.cb_projects->removeItem(index);
 			QMessageBox::information(this, tr("Deleted"), tr("Project deleted."));
 		}
 	}
@@ -167,6 +173,25 @@ void WMain::on_calc_clicked()
 	if (curr != nullptr && curr->can_calculate())
 	{
 		curr->calcuate();
+		// show results to ui
+		int cparallel = curr->count_parrallel_pairs();
+		ui.number_of_parallel->setText(QString::number(cparallel));
+		if (cparallel != 0)
+		{
+			double max_sx = curr->get_max_sx(),
+				max_sy = curr->get_max_sy(),
+				max_sz = curr->get_max_sz(),
+				min_sx = curr->get_min_sx(),
+				min_sy = curr->get_min_sy(),
+				min_sz = curr->get_min_sz();
+			
+			ui.field_ox->setText((abs(max_sx) < 0.00000001 && abs(min_sx) < 0.00000001) ? "0" :
+				tr("From") + " " + QString::number(min_sx) + " " + tr("To") + QString::number(max_sx));
+			ui.field_oy->setText((abs(max_sy) < 0.00000001 && abs(min_sy) < 0.00000001) ? "0" :
+				tr("From") + " " + QString::number(min_sy) + " " + tr("To") + QString::number(max_sy));
+			ui.field_oz->setText((abs(max_sz) < 0.00000001 && abs(min_sz) < 0.00000001) ? "0" :
+				tr("From") + " " + QString::number(min_sz) + " " + tr("To") + QString::number(max_sz));
+		}
 	}
 	else
 	{
@@ -186,6 +211,7 @@ void WMain::on_edit_coord()
 	{
 		CoordinateDialog ce(this, curroute);
 		ce.exec();
+		this->ui.number_of_straight_sections->setText(QString::number(curroute->count_number_of_straight_sections()));
 	}
 }
 
@@ -261,4 +287,70 @@ void WMain::on_about_triggered()
 Postgraduate student of department \'Shipbuilding and Marine Engineering Energy Complexes\', ASTU";
 	msgBox.setText(about);
 	msgBox.exec();
+}
+
+void WMain::on_action_open()
+{
+	QString filename = QFileDialog::getOpenFileName(this, tr("Open"));
+	if (!filename.isEmpty())
+	{
+		QFile file(filename);
+		if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+			return;
+		QTextStream in(&file);
+		
+		int size = 0, i = 0;
+		in >> size;
+		this->projects.clear();		
+		ui.cb_projects->clear();
+		ui.cb_routes->clear();
+		for (i = 0; i < size; ++i)
+		{
+			this->projects.append(Project());
+			this->projects[i].load_from_stream(in);
+			ui.cb_projects->addItem(projects[i].get_name());
+		}
+
+		file.close();
+
+	}
+}
+
+void WMain::on_action_save()
+{
+	QString filename = QFileDialog::getSaveFileName(this, tr("Save"));
+	if (!filename.isEmpty())
+	{
+		QFile file(filename);
+		if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+			return;
+		QTextStream out(&file);
+
+		out << this->projects.count() << endl;
+		for (int i = 0; i < this->projects.count(); ++i)
+		{
+			this->projects[i].save_to_stream(out);
+		}
+
+		file.close();
+	}
+}
+
+void WMain::on_action_import()
+{
+
+}
+
+void WMain::on_action_exit()
+{
+
+}
+
+void WMain::on_current_route_changed()
+{
+	Route * rt = this->get_current_route();
+	if (rt != nullptr)
+	{
+		ui.number_of_straight_sections->setText(QString::number(rt->count_number_of_straight_sections()));
+	}
 }

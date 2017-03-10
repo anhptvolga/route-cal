@@ -4,6 +4,7 @@
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QInputDialog>
 #include <QMessageBox>
+#include <QFileDialog>
 #include "ui_wmain.h"
 #include "CoordinateDialog.h"
 #include "project.h"
@@ -33,9 +34,16 @@ public slots:
 	void on_save_file_clicked();
 
 	void on_current_project_changed();
+	void on_current_route_changed();
 
 	void on_setting_triggered();
 	void on_about_triggered();
+
+	void on_action_open();
+	void on_action_save();
+	void on_action_import();
+	void on_action_exit();
+
 private:
 	Ui::MainWindow ui;
 
