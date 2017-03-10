@@ -83,66 +83,96 @@ void Route::calcuate()
 			}
 		}
 		// 6. Calculate delta S
-		double sum_ux = 0, sum_uy = 0, sum_uz = 0;
-		double sum_ex = 0, sum_ey = 0, sum_ez = 0;
+		this->max_sx = this->max_sy = this->max_sz = 0;
+		this->min_sx = this->min_sy = this->min_sz = 0;
 		for (int i = 0; i < details.count(); ++i)
 		{
 			if (abs(details[i].R) > 0.000000000001)
 			{
 				this->isHasParallel = true;
-				sum_ux += details[i].R * details[i].vu.get_x();
-				sum_uy += details[i].R * details[i].vu.get_y();
-				sum_uz += details[i].R * details[i].vu.get_z();
-
-				sum_ex += details[i].ve.get_x();
-				sum_ey += details[i].ve.get_y();
-				sum_ez += details[i].ve.get_z();
-			}
-		}
-		if (isHasParallel)
-		{
-			double lmx = sin(-Setting::Instance()->limit_angle()) * sum_ux + (1-cos(Setting::Instance()->limit_angle()))*sum_ex;
-			double lmy = sin(-Setting::Instance()->limit_angle()) * sum_uy + (1-cos(Setting::Instance()->limit_angle()))*sum_ey;
-			double lmz = sin(-Setting::Instance()->limit_angle()) * sum_uz + (1-cos(Setting::Instance()->limit_angle()))*sum_ez;
-			double ulmx = sin(-Setting::Instance()->limit_angle()) * sum_ux + (1-cos(Setting::Instance()->limit_angle()))*sum_ex;
-			double ulmy = sin(-Setting::Instance()->limit_angle()) * sum_uy + (1-cos(Setting::Instance()->limit_angle()))*sum_ey;
-			double ulmz = sin(-Setting::Instance()->limit_angle()) * sum_uz + (1-cos(Setting::Instance()->limit_angle()))*sum_ez;
-		
-			this->max_sx = max(lmx, ulmx);
-			this->max_sy = max(lmy, ulmy);
-			this->max_sz = max(lmz, ulmz);
-			this->min_sx = min(lmx, ulmx);
-			this->min_sy = min(lmy, ulmy);
-			this->min_sz = min(lmz, ulmz);
-			if (sum_ex != 0)
-			{
-				double t = sum_ux / sum_ex;
-				this->max_sx = max(this->max_sx, 
-					max(sin(t)*sum_ux + (1-cos(t))*sum_ex, sin(-t)*sum_ux + (1-cos(t))*sum_ex));
-				this->min_sx = min(this->min_sx, 
-					min(sin(t)*sum_ux + (1-cos(t))*sum_ex, sin(-t)*sum_ux + (1-cos(t))*sum_ex));
-			}
-			if (sum_ey != 0)
-			{
-				double t = sum_uy / sum_ey;
-				this->max_sy = max(this->max_sy, 
-					max(sin(t)*sum_uy + (1-cos(t))*sum_ey, sin(-t)*sum_uy + (1-cos(t))*sum_ey));
-				this->min_sy = min(this->min_sy, 
-					min(sin(t)*sum_uy + (1-cos(t))*sum_ey, sin(-t)*sum_uy + (1-cos(t))*sum_ey));
-			}
-			if (sum_ez != 0)
-			{
-				double t = sum_uz / sum_ez;
-				this->max_sz = max(this->max_sz, 
-					max(sin(t)*sum_uz + (1-cos(t))*sum_ez, sin(-t)*sum_uz + (1-cos(t))*sum_ez));
-				this->min_sz = min(this->min_sz, 
-					min(sin(t)*sum_uz + (1-cos(t))*sum_ez, sin(-t)*sum_uz + (1-cos(t))*sum_ez));
+				calc_max_min(i);
+				this->max_sx += details[i].R * details[i].max_sx;
+				this->max_sy += details[i].R * details[i].max_sy;
+				this->max_sz += details[i].R * details[i].max_sz;
+				this->min_sx += details[i].R * details[i].min_sx;
+				this->min_sz += details[i].R * details[i].min_sx;
 			}
 		}
 	}
 	else
 	{
 		// TODO: not enough points
+	}
+}
+
+inline double Route::f(double t, double u, double e)
+{
+	return sin(t)*u - (1-cos(t))*e;
+}
+
+void Route::calc_angle_t(int i, double t)
+{
+	// Calculate if angle t in range
+	if (abs(t) <= Setting::Instance()->limit_angle())
+	{
+		double value = f(t, details[i].vu.get_x(), details[i].ve.get_x());
+		// OX
+		if (details[i].max_sx < value)
+		{
+			details[i].max_sx = value;
+			details[i].tmax_x = t;
+		}
+		if (details[i].min_sx > value)
+		{
+			details[i].min_sx = value;
+			details[i].tmin_x = t;
+		}
+		// OY
+		value = f(t, details[i].vu.get_y(), details[i].ve.get_y());
+		if (details[i].max_sy < value)
+		{
+			details[i].max_sy = value;
+			details[i].tmax_y = t;
+		}
+		if (details[i].min_sy > value)
+		{
+			details[i].min_sy = value;
+			details[i].tmin_y = t;
+		}
+		// OZ
+		value = f(t, details[i].vu.get_z(), details[i].ve.get_z());
+		if (details[i].max_sz < value)
+		{
+			details[i].max_sz = value;
+			details[i].tmax_z = t;
+		}
+		if (details[i].min_sz > value)
+		{
+			details[i].min_sz = value;
+			details[i].tmin_z = t;
+		}
+	}
+}
+
+void Route::calc_max_min(int i)
+{
+	details[i].max_sx = details[i].max_sy = details[i].max_sz = LONG_MIN;
+	details[i].min_sx = details[i].min_sy = details[i].min_sz = LONG_MAX;
+	// calculate in limits
+	calc_angle_t(i, Setting::Instance()->limit_angle());
+	calc_angle_t(i, -Setting::Instance()->limit_angle());
+	
+	if (details[i].ve.get_x() != 0)
+	{
+		calc_angle_t(i, atan(details[i].vu.get_x() / details[i].ve.get_x()));
+	}
+	if (details[i].ve.get_y() != 0)
+	{
+		calc_angle_t(i, atan(details[i].vu.get_y() / details[i].ve.get_y()));
+	}
+	if (details[i].ve.get_z() != 0)
+	{
+		calc_angle_t(i, atan(details[i].vu.get_z() / details[i].ve.get_z()));
 	}
 }
 
@@ -188,18 +218,19 @@ void Route::write_detail_to_file(QString filename)
 
 	for (int k = 0; k < this->details.count(); ++k)
 	{
-		if (abs(details[k].R) > 0.0000000000001)
-		{						
+								
 		out << "Parallel: " << details[k].i +1 << ", " << details[k].j+1
 			<< " Points: (" << (details[k].i == 0 ? 1 : free_indexs[details[k].i-1]) << "; " << (details[k].i == 0 ? 2 : free_indexs[details[k].i-1]+1) << ") "
 			<< " Points: (" << (details[k].j == 0 ? 1 : free_indexs[details[k].j-1]) << "; " << (details[k].j == 0 ? 2 : free_indexs[details[k].j-1]+1) << ")" << endl;
-		out << "	vector n1: " << details[k].vn.to_string() << endl;
-		out << "	vector delta_T: " << details[k].delta_T.to_string() << endl;
-		out << "	L1 = " << details[k].L << endl;
-		out << "	R1 = " << details[k].R << endl;
-		out << "	vector R: " << details[k].vR.to_string() << endl;
-		out << "	vector e: " << details[k].ve.to_string() << endl;
-		out << "	vector u: " << details[k].vu.to_string() << endl;
+		if (abs(details[k].R) > 0.0000000000001)
+		{
+			out << "	vector n1: " << details[k].vn.to_string() << endl;
+			out << "	vector delta_T: " << details[k].delta_T.to_string() << endl;
+			out << "	L1 = " << details[k].L << endl;
+			out << "	R1 = " << details[k].R << endl;
+			out << "	vector R: " << details[k].vR.to_string() << endl;
+			out << "	vector e: " << details[k].ve.to_string() << endl;
+			out << "	vector u: " << details[k].vu.to_string() << endl;
 		}
 		else
 		{
@@ -210,15 +241,58 @@ void Route::write_detail_to_file(QString filename)
 	{
 		out << "---------- 6 ------------" << endl;
 		out << "Ox: " << endl
-			<< "	Max: " << this->max_sx << endl
-			<< "	Min: " << this->min_sx << endl;
+			<< "	Max: " << this->max_sx << endl;
+		//if (abs(max_sx)-0 > 0.0000000001)
+		//{
+			for (int i = 0; i < details.count(); ++i)
+			{
+				if (abs(details[i].R) > 0.0000001) out << "		t" << i+1 << " = " << details[i].tmax_x << endl;
+			}
+		//}
+		out << "	Min: " << this->min_sx << endl;
+		//if (abs(min_sx)-0 > 0.0000000001)
+		//{
+			for (int i = 0; i < details.count(); ++i)
+			{
+				if (abs(details[i].R) > 0.0000001) out << "		t" << i+1 << " = " << details[i].tmin_x << endl;
+			}
+		//}
+		//--------
 		out << "Oy: " << endl
-			<< "	Max: " << this->max_sy << endl
-			<< "	Min: " << this->min_sy << endl;	
+			<< "	Max: " << this->max_sy << endl;
+		//if (abs(max_sy)-0 > 0.0000000001)
+		//{
+			for (int i = 0; i < details.count(); ++i)
+			{
+				if (abs(details[i].R) > 0.0000001) out << "		t" << i+1 << " = " << details[i].tmax_y << endl;
+			}
+		//}
+		out << "	Min: " << this->min_sy << endl;
+		//if (abs(min_sy)-0 > 0.0000000001)
+		//{
+			for (int i = 0; i < details.count(); ++i)
+			{
+				if (abs(details[i].R) > 0.0000001) out << "		t" << i+1 << " = " << details[i].tmin_y << endl;
+			}
+		//}
+		
 		out << "Oz: " << endl
-			<< "	Max: " << this->max_sz << endl
-			<< "	Min: " << this->min_sz << endl;
-
+			<< "	Max: " << this->max_sz << endl;
+		//if (abs(max_sz)-0 > 0.0000000001)
+		//{
+			for (int i = 0; i < details.count(); ++i)
+			{
+				if (abs(details[i].R) > 0.0000001) out << "		t" << i+1 << " = " << details[i].tmax_z << endl;
+			}
+		//}
+		out << "	Min: " << this->min_sz << endl;
+		//if (abs(min_sz)-0 > 0.0000000001)
+		//{
+			for (int i = 0; i < details.count(); ++i)
+			{
+				if (abs(details[i].R) > 0.0000001) out << "		t" << i+1 << " = " << details[i].tmin_z << endl;
+			}
+		//}
 		//////////////////////////////////////////////////////////////////////////
 		// 7.
 		out << "---------- 7 ------------" << endl;

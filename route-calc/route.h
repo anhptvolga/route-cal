@@ -15,14 +15,14 @@
 struct DetailPar
 {
 	int i, j; // parallel pair vector i and j in vtsafter
-	
-
-
-	
 	Vector vn;
 	Vector delta_T;
 	double R;
 	double L;
+	double max_sx, max_sy, max_sz;
+	double min_sx, min_sy, min_sz;
+	double tmax_x, tmax_y, tmax_z;
+	double tmin_x, tmin_y, tmin_z;
 	Vector vR;
 	Vector ve;
 	Vector vu;
@@ -62,6 +62,11 @@ private:
 
 	QString name;
 	int count_parallel;
+
+	double f(double t, double u, double e);
+	void calc_max_min(int i);
+
+	void calc_angle_t(int i, double t);
 };
 
 #endif // ROUTE_H
