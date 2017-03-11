@@ -2,6 +2,7 @@
 #define ROUTE_H
 
 #include <climits>
+#include <QDateTime>
 #include <QObject>
 #include <QVector>
 #include <QFile>
@@ -52,6 +53,15 @@ public:
 
 	bool is_has_parallel();
 
+	/*
+	 * getter for date time
+	 */
+	QDateTime get_dt_creation();
+	QDateTime get_dt_last_change();
+	
+	/*
+	 * getters for max, min values
+	 */
 	double get_max_sx();
 	double get_max_sy();
 	double get_max_sz();
@@ -80,6 +90,9 @@ private:
 	void calc_max_min(int i);
 
 	void calc_angle_t(int i, double t);
+	
+	QDateTime dt_creation;
+	QDateTime dt_last_change;
 };
 
 #endif // ROUTE_H

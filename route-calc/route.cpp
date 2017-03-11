@@ -3,6 +3,7 @@
 Route::Route()
 {
 	this->isHasParallel = false;
+	this->dt_creation = this->dt_last_change = QDateTime::currentDateTime();
 }
 
 Route::Route(QString name)
@@ -11,6 +12,7 @@ Route::Route(QString name)
 	this->name = name;
 	this->points.append(Point(0,0,0));
 	this->isHasParallel = false;
+	this->dt_creation = this->dt_last_change = QDateTime::currentDateTime();
 }
 
 Route::~Route()
@@ -26,6 +28,7 @@ QVector<Point> Route::get_points()
 void Route::update_points(QVector<Point> pts) 
 {
 	this->points = pts;
+	this->dt_last_change = QDateTime::currentDateTime();
 }
 
 
@@ -183,11 +186,13 @@ void Route::calc_max_min(int i)
 void Route::set_free_indexs(QVector<int> frindexs)
 {
 	this->free_indexs = frindexs;
+	this->dt_last_change = QDateTime::currentDateTime();
 }
 
 void Route::set_name(QString value)
 {
 	this->name = value;
+	this->dt_last_change = QDateTime::currentDateTime();
 }
 
 QString Route::get_name()
@@ -360,7 +365,10 @@ void Route::load_from_stream(QTextStream& in)
 	int x=0, y=0, z=0;
 	in >> tmp;
 	this->name = tmp.trimmed();
-	
+	in >> tmp;
+	this->dt_creation.fromString(tmp);
+	in >> tmp;
+	this->dt_last_change.fromString(tmp);
 	in >> size;
 	this->points.clear();
 	for (i = 0; i < size; ++i)
@@ -382,7 +390,8 @@ void Route::save_to_stream(QTextStream& out)
 {
 	int i;
 	out << this->name << endl;
-	
+	out << this->dt_creation.toString() << endl;
+	out << this->dt_last_change.toString() << endl;
 	out << this->points.count() << endl;
 	for (i = 0; i < points.count(); ++i)
 		out << points[i].get_x() << " "
@@ -443,6 +452,16 @@ double Route::get_min_sz()
 bool Route::is_has_parallel()
 {
 	return this->isHasParallel;
+}
+
+QDateTime Route::get_dt_creation()
+{
+	return this->dt_creation;
+}
+
+QDateTime Route::get_dt_last_change()
+{
+	return this->dt_last_change;
 }
 
 /*
