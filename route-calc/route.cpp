@@ -32,6 +32,8 @@ void Route::update_points(QVector<Point> pts)
 
 void Route::calcuate()
 {
+	this->vtsafter.clear();
+	this->details.clear();
 	this->isHasParallel = false;
 	if (this->points.count() > 1)
 	{
@@ -387,7 +389,7 @@ void Route::save_to_stream(QTextStream& out)
 			<< points[i].get_y() << " "
 			<< points[i].get_z() << endl;
 	
-	out << this->free_indexs.count();
+	out << this->free_indexs.count() << endl;
 	for (i = 0; i < free_indexs.count(); ++i)
 		out << free_indexs[i] << " ";
 	out << endl;

@@ -10,8 +10,6 @@
 #include "point.h"
 #include "vector.h"
 
-#define PI 3.14159265
-
 struct DetailPar
 {
 	int i, j; // parallel pair vector i and j in vtsafter
@@ -77,7 +75,6 @@ private:
 	bool isHasParallel;
 
 	QString name;
-	int count_parallel;
 
 	double f(double t, double u, double e);
 	void calc_max_min(int i);
