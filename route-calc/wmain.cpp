@@ -1,4 +1,4 @@
-#include "wmain.h"
+﻿#include "wmain.h"
 
 WMain::WMain(QWidget *parent)
 	: QMainWindow(parent)
@@ -193,6 +193,21 @@ void WMain::on_calc_clicked()
 				tr("From") + " " + QString::number(min_sy) + " " + tr("To") + " " + QString::number(max_sy));
 			ui.field_oz->setText((abs(max_sz) < 0.00000001 && abs(min_sz) < 0.00000001) ? "0" :
 				tr("From") + " " + QString::number(min_sz) + " " + tr("To") + " " + QString::number(max_sz));
+			if (100 - min(max_sx, abs(min_sx)) > 0) { 
+				ui.note_ox->setText(tr("Appoint overdimension: ") + QString::fromWCharArray(L"\u2206") + "L = " + QString::number(100 - min(max_sx, abs(min_sx))));
+			} else {
+				ui.note_ox->setText(tr("Don\'t appoint overdimension."));
+			}
+			if (100 - min(max_sy, abs(min_sy)) > 0) { 
+				ui.note_oy->setText(tr("Appoint overdimension: ") + QString::fromWCharArray(L"\u2206") + "L = " + QString::number(100 - min(max_sy, abs(min_sy))));
+			} else {
+				ui.note_oy->setText(tr("Don\'t appoint overdimension."));
+			}
+			if (100 - min(max_sz, abs(min_sz)) > 0) { 
+				ui.note_oz->setText(tr("Appoint overdimension: ") + QString::fromWCharArray(L"\u2206") + "L = " + QString::number(100 - min(max_sz, abs(min_sz))));
+			} else {
+				ui.note_oz->setText(tr("Don\'t appoint overdimension."));
+			}
 		}
 	}
 	else
