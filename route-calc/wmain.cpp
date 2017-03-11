@@ -400,4 +400,11 @@ void WMain::on_current_route_changed()
 		ui.date_creation->setText("");
 		ui.date_change->setText("");
 	}
+	ui.note_ox->setText("");
+	ui.note_oy->setText("");
+	ui.note_oz->setText("");
+
+	ui.field_ox->setText("");
+	ui.field_oy->setText("");
+	ui.field_oz->setText("");
 }
