@@ -150,8 +150,8 @@ void WMain::on_del_route_clicked()
 
 void WMain::on_ren_route_clicked()
 {
-	int index = ui.cb_routes->currentIndex();
-	if (index != -1)
+	Route * rt = this->get_current_route();
+	if (rt != nullptr)
 	{
 		bool ok;
 		QString name = QInputDialog::getText(this, tr("Enter new name"),
@@ -159,14 +159,9 @@ void WMain::on_ren_route_clicked()
 		// TODO: rename project
 		if (ok && !name.isEmpty()) 
 		{
-			Project * prj = this->get_current_project();
-			if (prj != nullptr)
-			{
-				prj->get_proute(index)->set_name(name);
-				this->ui.cb_routes->setItemText(ui.cb_routes->currentIndex(), name);
-				ui.date_creation->setText(this->get_current_route()->get_dt_creation().toString("hh:mm dd.MM.yyyy"));
-				ui.date_change->setText(this->get_current_route()->get_dt_last_change().toString("hh:mm dd.MM.yyyy"));
-			}
+			rt->set_name(name);
+			this->ui.cb_routes->setItemText(ui.cb_routes->currentIndex(), name);
+			ui.date_change->setText(rt->get_dt_last_change().toString("hh:mm dd.MM.yyyy"));
 		}
 	}
 	else // No project selected
@@ -370,12 +365,25 @@ void WMain::on_action_save()
 
 void WMain::on_action_import()
 {
+	QString filename = QFileDialog::getOpenFileName(this, tr("Import"));
+	if (!filename.isEmpty())
+	{
+		QFile file(filename);
+		if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+			return;
+		QTextStream in(&file);
 
-}
+		int size = 0, i = 0;
+		in >> size;
+		for (i = 0; i < size; ++i)
+		{
+			this->projects.append(Project());
+			this->projects.last().load_from_stream(in);
+			ui.cb_projects->addItem(projects.last().get_name());
+		}
 
-void WMain::on_action_exit()
-{
-
+		file.close();
+	}
 }
 
 void WMain::on_current_route_changed()

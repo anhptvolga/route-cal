@@ -42,7 +42,6 @@ public slots:
 	void on_action_open();
 	void on_action_save();
 	void on_action_import();
-	void on_action_exit();
 
 private:
 	Ui::MainWindow ui;
