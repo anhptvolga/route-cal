@@ -110,7 +110,9 @@ void WMain::on_add_route_clicked()
 		{
 			cur->add_route(name);
 			ui.cb_routes->addItem(name);
-			ui.cb_routes->setCurrentIndex(ui.cb_routes->count()-1);	
+			ui.cb_routes->setCurrentIndex(ui.cb_routes->count()-1);
+			ui.date_creation->setText(this->get_current_route()->get_dt_creation().toString("hh:mm dd.MM.yyyy"));
+			ui.date_change->setText(this->get_current_route()->get_dt_last_change().toString("hh:mm dd.MM.yyyy"));
 		}
 	}
 	else // No project selected
@@ -134,6 +136,8 @@ void WMain::on_del_route_clicked()
 			{
 				prj->delete_route(index);
 				ui.cb_routes->removeItem(index);
+				ui.date_creation->setText(this->get_current_route()->get_dt_creation().toString("hh:mm dd.MM.yyyy"));
+				ui.date_change->setText(this->get_current_route()->get_dt_last_change().toString("hh:mm dd.MM.yyyy"));
 			}
 			QMessageBox::information(this, tr("Deleted"), tr("Route deleted."));
 		}
@@ -160,6 +164,8 @@ void WMain::on_ren_route_clicked()
 			{
 				prj->get_proute(index)->set_name(name);
 				this->ui.cb_routes->setItemText(ui.cb_routes->currentIndex(), name);
+				ui.date_creation->setText(this->get_current_route()->get_dt_creation().toString("hh:mm dd.MM.yyyy"));
+				ui.date_change->setText(this->get_current_route()->get_dt_last_change().toString("hh:mm dd.MM.yyyy"));
 			}
 		}
 	}
@@ -378,5 +384,12 @@ void WMain::on_current_route_changed()
 	if (rt != nullptr)
 	{
 		ui.number_of_straight_sections->setText(QString::number(rt->count_number_of_straight_sections()));
+		ui.date_creation->setText(rt->get_dt_creation().toString("hh:mm dd.MM.yyyy"));
+		ui.date_change->setText(rt->get_dt_last_change().toString("hh:mm dd.MM.yyyy"));
+	}
+	else
+	{
+		ui.date_creation->setText("");
+		ui.date_change->setText("");
 	}
 }
