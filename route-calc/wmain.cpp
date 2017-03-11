@@ -128,7 +128,7 @@ void WMain::on_del_route_clicked()
 	{
 		// comfirm
 		QMessageBox::StandardButton ok =  QMessageBox::question(
-			this, "Sure?", "Are you sure?");
+			this, tr("Sure")+"?", tr("Are you sure")+"?");
 		if (ok == QMessageBox::Yes)
 		{
 			Project * prj = this->get_current_project();
@@ -226,7 +226,7 @@ void WMain::on_save_file_clicked()
 		if (!filename.isEmpty())
 		{
 			curroute->write_detail_to_file(filename);
-			QMessageBox::information(this, tr("Saved"), tr("Saved."));
+			QMessageBox::information(this, tr("Saved"), tr("Successfully")+".");
 		}
 	}
 }
@@ -313,9 +313,9 @@ void WMain::on_setting_triggered()
 void WMain::on_about_triggered()
 {
 	QMessageBox msgBox;
-	QString about = "About program\n";
-	about += "Program calculates the values of compensations\'s possibilities of pipelines \nVersion: 1.0\nAuthor: Ngo Gia Viet,\
-Postgraduate student of department \'Shipbuilding and Marine Engineering Energy Complexes\', ASTU";
+	QString about = tr("About program") + "\n";
+	about += tr("Program calculates the values of compensations\'s possibilities of pipelines \nVersion: 1.0\nAuthor: Ngo Gia Viet,\n\
+Postgraduate student of department \'Shipbuilding and Marine Engineering Energy Complexes\', ASTU");
 	msgBox.setText(about);
 	msgBox.exec();
 }

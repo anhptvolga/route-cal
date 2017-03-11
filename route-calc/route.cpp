@@ -212,45 +212,45 @@ void Route::write_detail_to_file(QString filename)
 		return;
 	QTextStream out(&file);
 
-	out << "Number of lines: " << this->points.count() - 1 << endl;
-	out << "Vector12: " << vtsafter[0].to_string() << endl;
+	out << SettingDialog::tr("Number of lines") << ": " << this->points.count() - 1 << endl;
+	out << SettingDialog::tr("vector") << "12: " << vtsafter[0].to_string() << endl;
 	out << "------------------------------" << endl;
-	out << "3. Calculate vector" << endl;
+	out << "3. " + SettingDialog::tr("Calculate vector") << endl;
 	// print out vectors
 	for (int i = 0; i < vtsafter.count(); ++i){
 		out << "	" << i+1 << ". " << vtsafter[i].to_string()
-			<< " Points: (" << (i == 0 ? 1 : free_indexs[i-1]) << "; " << (i == 0 ? 2 : free_indexs[i-1]+1) << ") " << endl;
+			<< " " << SettingDialog::tr("Points") + ": (" << (i == 0 ? 1 : free_indexs[i-1]) << "; " << (i == 0 ? 2 : free_indexs[i-1]+1) << ") " << endl;
 	}
 	// 4.
 	out << "------------------------------" << endl;
-	out << "4. Calculate parallel" << endl;
+	out << "4. " + SettingDialog::tr("Calculate parallel") << endl;
 
 	for (int k = 0; k < this->details.count(); ++k)
 	{
-								
-		out << "Parallel: " << details[k].i +1 << ", " << details[k].j+1
-			<< " Points: (" << (details[k].i == 0 ? 1 : free_indexs[details[k].i-1]) << "; " << (details[k].i == 0 ? 2 : free_indexs[details[k].i-1]+1) << ") "
-			<< " Points: (" << (details[k].j == 0 ? 1 : free_indexs[details[k].j-1]) << "; " << (details[k].j == 0 ? 2 : free_indexs[details[k].j-1]+1) << ")" << endl;
+							
+		out << SettingDialog::tr("Parallel") + ": " << details[k].i +1 << ", " << details[k].j+1
+			<< " " << SettingDialog::tr("Points") << ": (" << (details[k].i == 0 ? 1 : free_indexs[details[k].i-1]) << "; " << (details[k].i == 0 ? 2 : free_indexs[details[k].i-1]+1) << ") "
+			<< " " << SettingDialog::tr("Points") << ": (" << (details[k].j == 0 ? 1 : free_indexs[details[k].j-1]) << "; " << (details[k].j == 0 ? 2 : free_indexs[details[k].j-1]+1) << ")" << endl;
 		if (abs(details[k].R) > 0.0000000000001)
 		{
-			out << "	vector n1: " << details[k].vn.to_string() << endl;
-			out << "	vector delta_T: " << details[k].delta_T.to_string() << endl;
+			out << "	" << SettingDialog::tr("vector") << " n: " << details[k].vn.to_string() << endl;
+			out << "	" << SettingDialog::tr("vector") << " delta_T: " << details[k].delta_T.to_string() << endl;
 			out << "	L1 = " << details[k].L << endl;
 			out << "	R1 = " << details[k].R << endl;
-			out << "	vector R: " << details[k].vR.to_string() << endl;
-			out << "	vector e: " << details[k].ve.to_string() << endl;
-			out << "	vector u: " << details[k].vu.to_string() << endl;
+			out << "	" << SettingDialog::tr("vector") << " R: " << details[k].vR.to_string() << endl;
+			out << "	" << SettingDialog::tr("vector") << " e: " << details[k].ve.to_string() << endl;
+			out << "	" << SettingDialog::tr("vector") << " u: " << details[k].vu.to_string() << endl;
 		}
 		else
 		{
-			out << "	R = 0. Rejected." << endl;
+			out << "	R = 0. " << SettingDialog::tr("Rejected") << "." << endl;
 		}
 	}
 	if (isHasParallel)
 	{
 		out << "---------- 6 ------------" << endl;
 		out << "Ox: " << endl
-			<< "	Max: " << this->max_sx << endl;
+			<< "	" << SettingDialog::tr("Max") << ": " << this->max_sx << endl;
 		//if (abs(max_sx)-0 > 0.0000000001)
 		//{
 			for (int i = 0; i < details.count(); ++i)
@@ -258,7 +258,7 @@ void Route::write_detail_to_file(QString filename)
 				if (abs(details[i].R) > 0.0000001) out << "		t" << i+1 << " = " << details[i].tmax_x << endl;
 			}
 		//}
-		out << "	Min: " << this->min_sx << endl;
+		out << "	" << SettingDialog::tr("Min") << ": " << this->min_sx << endl;
 		//if (abs(min_sx)-0 > 0.0000000001)
 		//{
 			for (int i = 0; i < details.count(); ++i)
@@ -268,7 +268,7 @@ void Route::write_detail_to_file(QString filename)
 		//}
 		//--------
 		out << "Oy: " << endl
-			<< "	Max: " << this->max_sy << endl;
+			<< "	" << SettingDialog::tr("Max") << ": " << this->max_sy << endl;
 		//if (abs(max_sy)-0 > 0.0000000001)
 		//{
 			for (int i = 0; i < details.count(); ++i)
@@ -276,7 +276,7 @@ void Route::write_detail_to_file(QString filename)
 				if (abs(details[i].R) > 0.0000001) out << "		t" << i+1 << " = " << details[i].tmax_y << endl;
 			}
 		//}
-		out << "	Min: " << this->min_sy << endl;
+		out << "	" << SettingDialog::tr("Min") << ": " << this->min_sy << endl;
 		//if (abs(min_sy)-0 > 0.0000000001)
 		//{
 			for (int i = 0; i < details.count(); ++i)
@@ -286,7 +286,7 @@ void Route::write_detail_to_file(QString filename)
 		//}
 		
 		out << "Oz: " << endl
-			<< "	Max: " << this->max_sz << endl;
+			<< "	" << SettingDialog::tr("Max") << ": " << this->max_sz << endl;
 		//if (abs(max_sz)-0 > 0.0000000001)
 		//{
 			for (int i = 0; i < details.count(); ++i)
@@ -294,7 +294,7 @@ void Route::write_detail_to_file(QString filename)
 				if (abs(details[i].R) > 0.0000001) out << "		t" << i+1 << " = " << details[i].tmax_z << endl;
 			}
 		//}
-		out << "	Min: " << this->min_sz << endl;
+		out << "	" << SettingDialog::tr("Min") << ": " << this->min_sz << endl;
 		//if (abs(min_sz)-0 > 0.0000000001)
 		//{
 			for (int i = 0; i < details.count(); ++i)
@@ -308,51 +308,58 @@ void Route::write_detail_to_file(QString filename)
 		if (abs(this->max_sx) < 0.0000000001 && abs(this->min_sx) < 0.0000000001) 
 		{
 			out << "Ox: "
-				<< "	Field of compensations\' possibilities: 0" << endl;
+				<< "	" << SettingDialog::tr("Field of compensations\' possibilities") << ": 0" << endl;
 		}
 		else
 		{
 			out << "Ox: "
-				<< "	Field of compensations\' possibilities: from " << this->min_sx << " to " << this->max_sx << endl;
+				<< "	" << SettingDialog::tr("Field of compensations\' possibilities")
+				<< ": " << SettingDialog::tr("from") << " " << this->min_sx 
+				<< " " << SettingDialog::tr("to") << " " << this->max_sx << endl;
 		}
 
 		if (100 - min(max_sx, abs(min_sx)) > 0) { 
-			out << "	Note: appoint overdimension: delta_L = " << 100 - min(max_sx, abs(min_sx)) << endl;
+			out << "	" << SettingDialog::tr("Note") << ": " << SettingDialog::tr("appoint overdimension") << ": delta_L = " << 100 - min(max_sx, abs(min_sx)) << endl;
 		} else {
-			out << "	Note: don\'t appoint overdimension." << endl;
+			out << "	" << SettingDialog::tr("Note") << ": " << SettingDialog::tr("don\'t appoint overdimension") << "." << endl;
 		}
 		//----------
 		if (abs(max_sy) < 0.0000000001 && abs(min_sy) < 0.0000000001) 
 		{
 			out << "Oy: "
-				<< "	Field of compensations\' possibilities: 0" << endl;
+				<< "	" << SettingDialog::tr("Field of compensations\' possibilities") << ": 0" << endl;
 		}
 		else
 		{
 			out << "Oy: "
-				<< "	Field of compensations\' possibilities: from " << min_sy << " to " << max_sy << endl;
+				<< "	" << SettingDialog::tr("Field of compensations\' possibilities")
+				<< ": " << SettingDialog::tr("from") << " " << this->min_sy
+				<< " " << SettingDialog::tr("to") << " " << this->max_sy << endl;
 		}
 
 		if (100 - min(max_sy, abs(min_sy)) > 0) { 
-			out << "	Note: appoint overdimension: delta_L = " << 100 - min(max_sy, abs(min_sy)) << endl;
+			out << "	" << SettingDialog::tr("Note") << ": " << SettingDialog::tr("appoint overdimension") << ": delta_L = " << 100 - min(max_sy, abs(min_sy)) << endl;
 		} else {
-			out << "	Note: don\'t appoint overdimension." << endl;
+			out << "	" << SettingDialog::tr("Note") << ": " << SettingDialog::tr("don\'t appoint overdimension") << "." << endl;
 		}
 		//----------
 		if (abs(max_sz) < 0.0000000001 && abs(min_sz) < 0.0000000001) 
 		{
 			out << "Oz: "
-				<< "	Field of compensations\' possibilities: 0" << endl;
+				<< "	" << SettingDialog::tr("Field of compensations\' possibilities") << ": 0" << endl;
 		}
 		else
 		{
 			out << "Oz: "
-				<< "	Field of compensations\' possibilities: from " << min_sz << " to " << max_sz << endl;
+				<< "	" << SettingDialog::tr("Field of compensations\' possibilities")
+				<< ": " << SettingDialog::tr("from") << " " << this->min_sz
+				<< " " << SettingDialog::tr("to") << " " << this->max_sz << endl;
 		}
+
 		if (100 - min(max_sz, abs(min_sz)) > 0) { 
-			out << "	Note: appoint overdimension: delta_L = " << 100 - min(max_sz, abs(min_sz)) << endl;
+			out << "	" << SettingDialog::tr("Note") << ": " << SettingDialog::tr("appoint overdimension") << ": delta_L = " << 100 - min(max_sz, abs(min_sz)) << endl;
 		} else {
-			out << "	Note: don\'t appoint overdimension." << endl;
+			out << "	" << SettingDialog::tr("Note") << ": " << SettingDialog::tr("don\'t appoint overdimension") << "." << endl;
 		}
 	}
 	file.close();

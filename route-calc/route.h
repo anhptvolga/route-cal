@@ -10,6 +10,8 @@
 #include <QTextStream>
 #include "point.h"
 #include "vector.h"
+#include "settingdialog.h"
+
 
 struct DetailPar
 {
@@ -29,6 +31,7 @@ struct DetailPar
 
 class Route
 {
+
 public:
 	Route();
 	Route(QString name);
