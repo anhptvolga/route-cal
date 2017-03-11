@@ -3,6 +3,11 @@
 
 #include <QString>
 
+#define ESP 0.00000000001
+#define PI 3.14159265358979323846264338
+#define RadToDeg(x) ((x * 180) / 3.14159265358979323846264338)
+#define DegToRad(x) ((x * 3.14159265358979323846264338) / 180)
+
 /**
  *  Singleton setting class
  */
@@ -16,6 +21,10 @@ public:
 	void  set_accuracy(double a);
 	double accuracy();
 
+	/**
+	 * Setter and getter for limit angle
+	 * [in] a : angle in radian
+	 */
 	void set_limit_angle(double a);
 	double limit_angle();
 
@@ -31,11 +40,11 @@ private:
 
 	static Setting* _pinstance;
 
-	double value_accuracy;
-	double value_limit_angle;
+	double value_accuracy;		/// value of accuracy
+	double value_limit_angle;	/// limit angle in radian
 
-	QString value_author;
-	QString value_language;
+	QString value_author;		/// author name
+	QString value_language;		/// language
 };
 
 #endif
