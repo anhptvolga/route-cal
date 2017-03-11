@@ -39,6 +39,7 @@ public:
 	QVector<Point> get_points();
 
 	void set_free_indexs(QVector<int> frindexs);
+	QString get_free_indexs();
 
 	void calcuate();
 	bool can_calculate();

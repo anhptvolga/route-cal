@@ -271,23 +271,27 @@ Project* WMain::get_current_project()
 void WMain::on_pt_connection_clicked()
 {
 	bool ok;
-	QString name = QInputDialog::getText(this, tr("Enter indexs of points"),
-		tr("Indexs (seperate by \',\'):"), QLineEdit::Normal, "", &ok);
-	// TODO: rename route
-	if (ok && !name.isEmpty()) 
+	Route *rt = this->get_current_route();
+	if (rt != nullptr)
 	{
-		QStringList nums = name.split(",", QString::SkipEmptyParts);
-		QVector<int> indexs;
-		int tmp;
-		for (int i = 0; i < nums.count(); ++i)
+		QString name = QInputDialog::getText(this, tr("Enter indexs of points"),
+			tr("Indexs (seperate by \',\'):"), QLineEdit::Normal, rt->get_free_indexs(), &ok);
+		// TODO: rename route
+		if (ok && !name.isEmpty()) 
 		{
-			tmp = nums[i].toInt();
-			if (!indexs.contains(tmp))
+			QStringList nums = name.split(",", QString::SkipEmptyParts);
+			QVector<int> indexs;
+			int tmp;
+			for (int i = 0; i < nums.count(); ++i)
 			{
-				indexs.append(tmp);
+				tmp = nums[i].toInt();
+				if (!indexs.contains(tmp))
+				{
+					indexs.append(tmp);
+				}
 			}
+			this->get_current_route()->set_free_indexs(indexs);
 		}
-		this->get_current_route()->set_free_indexs(indexs);
 	}
 }
 

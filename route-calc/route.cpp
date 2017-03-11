@@ -366,9 +366,9 @@ void Route::load_from_stream(QTextStream& in)
 	in >> tmp;
 	this->name = tmp.trimmed();
 	in >> tmp;
-	this->dt_creation.fromString(tmp);
+	this->dt_creation = QDateTime::fromString(tmp, "hh:mmdd.MM.yyyy");
 	in >> tmp;
-	this->dt_last_change.fromString(tmp);
+	this->dt_last_change = QDateTime::fromString(tmp, "hh:mmdd.MM.yyyy");
 	in >> size;
 	this->points.clear();
 	for (i = 0; i < size; ++i)
@@ -390,8 +390,8 @@ void Route::save_to_stream(QTextStream& out)
 {
 	int i;
 	out << this->name << endl;
-	out << this->dt_creation.toString() << endl;
-	out << this->dt_last_change.toString() << endl;
+	out << this->dt_creation.toString("hh:mmdd.MM.yyyy") << endl;
+	out << this->dt_last_change.toString("hh:mmdd.MM.yyyy") << endl;
 	out << this->points.count() << endl;
 	for (i = 0; i < points.count(); ++i)
 		out << points[i].get_x() << " "
@@ -462,6 +462,16 @@ QDateTime Route::get_dt_creation()
 QDateTime Route::get_dt_last_change()
 {
 	return this->dt_last_change;
+}
+
+QString Route::get_free_indexs()
+{
+	QString res("");
+	for (int i = 0; i < free_indexs.count()-1; ++i)
+		res += QString::number(free_indexs[i]) + ", ";
+	if (!free_indexs.isEmpty())
+		res += QString::number(free_indexs.last());
+	return res;
 }
 
 /*
