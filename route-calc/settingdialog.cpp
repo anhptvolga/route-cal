@@ -20,6 +20,8 @@ SettingDialog::SettingDialog(QWidget *parent)
 	// TODO: setting current language
 
 	connect(this->ui.buttonBox, SIGNAL(accepted()), this, SLOT(on_ok_clicked()));
+	connect(this->ui.rb_en, SIGNAL(toggled(bool)), this, SLOT(on_set_en_lang()));
+	connect(this->ui.rb_ru, SIGNAL(toggled(bool)), this, SLOT(on_set_ru_lang()));
 }
 
 SettingDialog::~SettingDialog()
@@ -34,4 +36,16 @@ void SettingDialog::on_ok_clicked()
 	Setting::Instance()->set_limit_angle(DegToRad(this->ui.sb_angle->value()));
 	Setting::Instance()->set_language(ui.rb_en->isChecked() ? "en" : "ru");
 	// TODO: change language
+}
+
+void SettingDialog::on_set_ru_lang()
+{
+	TranslatorManager::instance()->setTranslator(QString("ru"));
+	ui.retranslateUi(this);
+}
+
+void SettingDialog::on_set_en_lang()
+{
+	TranslatorManager::instance()->setTranslator(QString("en"));
+	ui.retranslateUi(this);
 }

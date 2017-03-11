@@ -308,6 +308,7 @@ void WMain::on_setting_triggered()
 {
 	SettingDialog st(this);
 	st.exec();
+	ui.retranslateUi(this);
 }
 
 void WMain::on_about_triggered()

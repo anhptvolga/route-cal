@@ -2,6 +2,7 @@
 #define SETTINGDIALOG_H
 
 #include <QWidget>
+#include "TranslatorManager.h"
 #include "ui_setting.h"
 #include "Setting.h"
 
@@ -16,6 +17,8 @@ public:
 
 public slots:
 	void on_ok_clicked();
+	void on_set_en_lang();
+	void on_set_ru_lang();
 
 private:
 	Ui::SettingDialog ui;
