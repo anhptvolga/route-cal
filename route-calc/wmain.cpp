@@ -25,8 +25,8 @@ WMain::WMain(QWidget *parent)
 	connect(ui.cb_projects, SIGNAL(currentIndexChanged(int)), this, SLOT(on_current_project_changed()));
 	connect(ui.cb_routes, SIGNAL(currentIndexChanged(int)), this, SLOT(on_current_route_changed()));
 
-	connect(ui.menuSetting, SIGNAL(aboutToShow()), this, SLOT(on_setting_triggered()));
-	connect(ui.menuAbout, SIGNAL(aboutToShow()), this, SLOT(on_about_triggered()));
+	connect(ui.actionSetting, SIGNAL(triggered(bool)), this, SLOT(on_setting_triggered()));
+	connect(ui.actionAbout, SIGNAL(triggered(bool)), this, SLOT(on_about_triggered()));
 
 	connect(ui.actionOpen, SIGNAL(triggered(bool)), this, SLOT(on_action_open()));
 	connect(ui.actionSave, SIGNAL(triggered(bool)), this, SLOT(on_action_save()));
@@ -180,19 +180,19 @@ void WMain::on_calc_clicked()
 		ui.number_of_parallel->setText(QString::number(cparallel));
 		if (cparallel != 0)
 		{
-			double max_sx = curr->get_max_sx(),
-				max_sy = curr->get_max_sy(),
-				max_sz = curr->get_max_sz(),
-				min_sx = curr->get_min_sx(),
-				min_sy = curr->get_min_sy(),
-				min_sz = curr->get_min_sz();
+			double  max_sx = curr->get_max_sx(),
+				    max_sy = curr->get_max_sy(),
+					max_sz = curr->get_max_sz(),
+					min_sx = curr->get_min_sx(),
+					min_sy = curr->get_min_sy(),
+					min_sz = curr->get_min_sz();
 			
 			ui.field_ox->setText((abs(max_sx) < 0.00000001 && abs(min_sx) < 0.00000001) ? "0" :
-				tr("From") + " " + QString::number(min_sx) + " " + tr("To") + QString::number(max_sx));
+				tr("From") + " " + QString::number(min_sx) + " " + tr("To") + " " + QString::number(max_sx));
 			ui.field_oy->setText((abs(max_sy) < 0.00000001 && abs(min_sy) < 0.00000001) ? "0" :
-				tr("From") + " " + QString::number(min_sy) + " " + tr("To") + QString::number(max_sy));
+				tr("From") + " " + QString::number(min_sy) + " " + tr("To") + " " + QString::number(max_sy));
 			ui.field_oz->setText((abs(max_sz) < 0.00000001 && abs(min_sz) < 0.00000001) ? "0" :
-				tr("From") + " " + QString::number(min_sz) + " " + tr("To") + QString::number(max_sz));
+				tr("From") + " " + QString::number(min_sz) + " " + tr("To") + " " + QString::number(max_sz));
 		}
 	}
 	else
@@ -203,7 +203,16 @@ void WMain::on_calc_clicked()
 
 void WMain::on_save_file_clicked()
 {
-
+	Route* curroute = this->get_current_route();
+	if (curroute != nullptr)
+	{
+		QString filename = QFileDialog::getSaveFileName(this, tr("Save"));
+		if (!filename.isEmpty())
+		{
+			curroute->write_detail_to_file(filename);
+			QMessageBox::information(this, tr("Saved"), tr("Saved."));
+		}
+	}
 }
 
 void WMain::on_edit_coord()
