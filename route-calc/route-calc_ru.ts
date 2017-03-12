@@ -276,106 +276,106 @@
         <translation>Русский</translation>
     </message>
     <message>
-        <location filename="route.cpp" line="216"/>
+        <location filename="route.cpp" line="222"/>
         <source>Number of lines</source>
         <translation>Количество прямых участков</translation>
     </message>
     <message>
-        <location filename="route.cpp" line="217"/>
-        <location filename="route.cpp" line="237"/>
-        <location filename="route.cpp" line="238"/>
-        <location filename="route.cpp" line="241"/>
-        <location filename="route.cpp" line="242"/>
+        <location filename="route.cpp" line="223"/>
         <location filename="route.cpp" line="243"/>
+        <location filename="route.cpp" line="244"/>
+        <location filename="route.cpp" line="247"/>
+        <location filename="route.cpp" line="248"/>
+        <location filename="route.cpp" line="249"/>
         <source>vector</source>
         <translation>вектор</translation>
     </message>
     <message>
-        <location filename="route.cpp" line="219"/>
+        <location filename="route.cpp" line="225"/>
         <source>Calculate vector</source>
         <translation>Вычисление векторов</translation>
     </message>
     <message>
-        <location filename="route.cpp" line="223"/>
-        <location filename="route.cpp" line="233"/>
-        <location filename="route.cpp" line="234"/>
+        <location filename="route.cpp" line="229"/>
+        <location filename="route.cpp" line="239"/>
+        <location filename="route.cpp" line="240"/>
         <source>Points</source>
         <translation>Точки</translation>
     </message>
     <message>
-        <location filename="route.cpp" line="227"/>
+        <location filename="route.cpp" line="233"/>
         <source>Calculate parallel</source>
         <translation>Вычисление параллельных участков</translation>
     </message>
     <message>
-        <location filename="route.cpp" line="232"/>
+        <location filename="route.cpp" line="238"/>
         <source>Parallel</source>
         <translation>Параллельно</translation>
     </message>
     <message>
-        <location filename="route.cpp" line="247"/>
+        <location filename="route.cpp" line="253"/>
         <source>Rejected</source>
         <translation>Отказано</translation>
     </message>
     <message>
-        <location filename="route.cpp" line="254"/>
-        <location filename="route.cpp" line="272"/>
-        <location filename="route.cpp" line="290"/>
+        <location filename="route.cpp" line="260"/>
+        <location filename="route.cpp" line="278"/>
+        <location filename="route.cpp" line="296"/>
         <source>Max</source>
         <translation>Максимум</translation>
     </message>
     <message>
-        <location filename="route.cpp" line="262"/>
-        <location filename="route.cpp" line="280"/>
-        <location filename="route.cpp" line="298"/>
+        <location filename="route.cpp" line="268"/>
+        <location filename="route.cpp" line="286"/>
+        <location filename="route.cpp" line="304"/>
         <source>Min</source>
         <translation>Минимум</translation>
     </message>
     <message>
-        <location filename="route.cpp" line="312"/>
-        <location filename="route.cpp" line="317"/>
-        <location filename="route.cpp" line="331"/>
-        <location filename="route.cpp" line="336"/>
-        <location filename="route.cpp" line="350"/>
-        <location filename="route.cpp" line="355"/>
+        <location filename="route.cpp" line="318"/>
+        <location filename="route.cpp" line="323"/>
+        <location filename="route.cpp" line="337"/>
+        <location filename="route.cpp" line="342"/>
+        <location filename="route.cpp" line="356"/>
+        <location filename="route.cpp" line="361"/>
         <source>Field of compensations&apos; possibilities</source>
         <translation>Область компенсационных возможностей</translation>
     </message>
     <message>
-        <location filename="route.cpp" line="318"/>
-        <location filename="route.cpp" line="337"/>
-        <location filename="route.cpp" line="356"/>
+        <location filename="route.cpp" line="324"/>
+        <location filename="route.cpp" line="343"/>
+        <location filename="route.cpp" line="362"/>
         <source>from</source>
         <translation>от</translation>
     </message>
     <message>
-        <location filename="route.cpp" line="319"/>
-        <location filename="route.cpp" line="338"/>
-        <location filename="route.cpp" line="357"/>
+        <location filename="route.cpp" line="325"/>
+        <location filename="route.cpp" line="344"/>
+        <location filename="route.cpp" line="363"/>
         <source>to</source>
         <translation>до</translation>
     </message>
     <message>
-        <location filename="route.cpp" line="323"/>
-        <location filename="route.cpp" line="325"/>
-        <location filename="route.cpp" line="342"/>
-        <location filename="route.cpp" line="344"/>
-        <location filename="route.cpp" line="361"/>
-        <location filename="route.cpp" line="363"/>
+        <location filename="route.cpp" line="329"/>
+        <location filename="route.cpp" line="331"/>
+        <location filename="route.cpp" line="348"/>
+        <location filename="route.cpp" line="350"/>
+        <location filename="route.cpp" line="367"/>
+        <location filename="route.cpp" line="369"/>
         <source>Note</source>
         <translation>Примечание</translation>
     </message>
     <message>
-        <location filename="route.cpp" line="323"/>
-        <location filename="route.cpp" line="342"/>
-        <location filename="route.cpp" line="361"/>
+        <location filename="route.cpp" line="329"/>
+        <location filename="route.cpp" line="348"/>
+        <location filename="route.cpp" line="367"/>
         <source>appoint overdimension</source>
         <translation>Назначить припуск</translation>
     </message>
     <message>
-        <location filename="route.cpp" line="325"/>
-        <location filename="route.cpp" line="344"/>
-        <location filename="route.cpp" line="363"/>
+        <location filename="route.cpp" line="331"/>
+        <location filename="route.cpp" line="350"/>
+        <location filename="route.cpp" line="369"/>
         <source>don&apos;t appoint overdimension</source>
         <translation>Не требуется припуск</translation>
     </message>
@@ -383,160 +383,165 @@
 <context>
     <name>WMain</name>
     <message>
-        <location filename="wmain.cpp" line="47"/>
+        <location filename="wmain.cpp" line="50"/>
         <source>Enter new project name</source>
         <translation>Ввидите имя проекта</translation>
     </message>
     <message>
-        <location filename="wmain.cpp" line="48"/>
-        <location filename="wmain.cpp" line="86"/>
-        <location filename="wmain.cpp" line="107"/>
-        <location filename="wmain.cpp" line="158"/>
+        <location filename="wmain.cpp" line="51"/>
+        <location filename="wmain.cpp" line="89"/>
+        <location filename="wmain.cpp" line="110"/>
+        <location filename="wmain.cpp" line="161"/>
         <source>Name:</source>
         <translation>Имя:</translation>
     </message>
     <message>
-        <location filename="wmain.cpp" line="70"/>
-        <location filename="wmain.cpp" line="142"/>
+        <location filename="wmain.cpp" line="73"/>
+        <location filename="wmain.cpp" line="145"/>
         <source>Deleted</source>
         <translation>Удалено</translation>
     </message>
     <message>
-        <location filename="wmain.cpp" line="70"/>
+        <location filename="wmain.cpp" line="73"/>
         <source>Project deleted.</source>
         <translation>Проект удалён.</translation>
     </message>
     <message>
-        <location filename="wmain.cpp" line="75"/>
-        <location filename="wmain.cpp" line="96"/>
-        <location filename="wmain.cpp" line="120"/>
+        <location filename="wmain.cpp" line="78"/>
+        <location filename="wmain.cpp" line="99"/>
+        <location filename="wmain.cpp" line="123"/>
         <source>No project</source>
         <translation>Нет проекта</translation>
     </message>
     <message>
-        <location filename="wmain.cpp" line="75"/>
-        <location filename="wmain.cpp" line="96"/>
+        <location filename="wmain.cpp" line="78"/>
+        <location filename="wmain.cpp" line="99"/>
         <source>Please create project first.</source>
         <translation>С начала создайте проект, пожалуйста.</translation>
     </message>
     <message>
-        <location filename="wmain.cpp" line="85"/>
-        <location filename="wmain.cpp" line="157"/>
+        <location filename="wmain.cpp" line="88"/>
+        <location filename="wmain.cpp" line="160"/>
         <source>Enter new name</source>
         <translation>Ввидите новый имя</translation>
     </message>
     <message>
-        <location filename="wmain.cpp" line="106"/>
+        <location filename="wmain.cpp" line="109"/>
         <source>Enter new route name</source>
         <translation>Ввидите имя трассы</translation>
     </message>
     <message>
-        <location filename="wmain.cpp" line="120"/>
+        <location filename="wmain.cpp" line="123"/>
         <source>Please choose project first.</source>
         <translation>С начала выберите проект, пожалуйста.</translation>
     </message>
     <message>
-        <location filename="wmain.cpp" line="131"/>
+        <location filename="wmain.cpp" line="134"/>
         <source>Sure</source>
         <translation>Уверены</translation>
     </message>
     <message>
-        <location filename="wmain.cpp" line="131"/>
+        <location filename="wmain.cpp" line="134"/>
         <source>Are you sure</source>
         <translation>Вы точно хотите</translation>
     </message>
     <message>
-        <location filename="wmain.cpp" line="142"/>
+        <location filename="wmain.cpp" line="145"/>
         <source>Route deleted.</source>
         <translation>Трасса удалена.</translation>
     </message>
     <message>
-        <location filename="wmain.cpp" line="147"/>
-        <location filename="wmain.cpp" line="169"/>
+        <location filename="wmain.cpp" line="150"/>
+        <location filename="wmain.cpp" line="172"/>
         <source>No route</source>
         <translation>Нет трасс</translation>
     </message>
     <message>
-        <location filename="wmain.cpp" line="147"/>
+        <location filename="wmain.cpp" line="150"/>
         <source>No route to delete.</source>
         <translation>Удалить ничего.</translation>
     </message>
     <message>
-        <location filename="wmain.cpp" line="169"/>
+        <location filename="wmain.cpp" line="172"/>
         <source>No route to rename.</source>
         <translation>Пока нет трассы.</translation>
     </message>
     <message>
-        <location filename="wmain.cpp" line="192"/>
-        <location filename="wmain.cpp" line="194"/>
-        <location filename="wmain.cpp" line="196"/>
+        <location filename="wmain.cpp" line="195"/>
+        <location filename="wmain.cpp" line="197"/>
+        <location filename="wmain.cpp" line="199"/>
         <source>From</source>
         <translation>От</translation>
     </message>
     <message>
-        <location filename="wmain.cpp" line="192"/>
-        <location filename="wmain.cpp" line="194"/>
-        <location filename="wmain.cpp" line="196"/>
+        <location filename="wmain.cpp" line="195"/>
+        <location filename="wmain.cpp" line="197"/>
+        <location filename="wmain.cpp" line="199"/>
         <source>To</source>
         <translation>До</translation>
     </message>
     <message>
-        <location filename="wmain.cpp" line="198"/>
-        <location filename="wmain.cpp" line="203"/>
-        <location filename="wmain.cpp" line="208"/>
+        <location filename="wmain.cpp" line="201"/>
+        <location filename="wmain.cpp" line="206"/>
+        <location filename="wmain.cpp" line="211"/>
         <source>Appoint overdimension: </source>
         <translation>Назначить припуск:</translation>
     </message>
     <message>
-        <location filename="wmain.cpp" line="200"/>
-        <location filename="wmain.cpp" line="205"/>
-        <location filename="wmain.cpp" line="210"/>
+        <location filename="wmain.cpp" line="203"/>
+        <location filename="wmain.cpp" line="208"/>
+        <location filename="wmain.cpp" line="213"/>
         <source>Don&apos;t appoint overdimension.</source>
         <translation>Не требуется припуск.</translation>
     </message>
     <message>
-        <location filename="wmain.cpp" line="216"/>
+        <location filename="wmain.cpp" line="219"/>
         <source>Can not calculate</source>
         <translation>Что-то нетак</translation>
     </message>
     <message>
-        <location filename="wmain.cpp" line="216"/>
+        <location filename="wmain.cpp" line="219"/>
         <source>Please checking route again.</source>
         <translation>Не смогли считать. Проверите данные, пожалуйста.</translation>
     </message>
     <message>
-        <location filename="wmain.cpp" line="225"/>
-        <location filename="wmain.cpp" line="358"/>
+        <location filename="wmain.cpp" line="228"/>
+        <location filename="wmain.cpp" line="362"/>
         <source>Save</source>
         <translation>Сохранить</translation>
     </message>
     <message>
-        <location filename="wmain.cpp" line="229"/>
+        <location filename="wmain.cpp" line="228"/>
+        <source>Text (*.txt)</source>
+        <translation>Текстовый файл (*.txt)</translation>
+    </message>
+    <message>
+        <location filename="wmain.cpp" line="233"/>
         <source>Saved</source>
         <translation>Сохранён</translation>
     </message>
     <message>
-        <location filename="wmain.cpp" line="229"/>
+        <location filename="wmain.cpp" line="233"/>
         <source>Successfully</source>
         <translation>Успешно</translation>
     </message>
     <message>
-        <location filename="wmain.cpp" line="277"/>
+        <location filename="wmain.cpp" line="281"/>
         <source>Enter indexs of points</source>
         <translation>Введите номер точек свободного соединения</translation>
     </message>
     <message>
-        <location filename="wmain.cpp" line="278"/>
+        <location filename="wmain.cpp" line="282"/>
         <source>Indexs (seperate by &apos;,&apos;):</source>
         <translation>Номер точек свободного соединения (разделить по &apos;,&apos;):</translation>
     </message>
     <message>
-        <location filename="wmain.cpp" line="322"/>
+        <location filename="wmain.cpp" line="326"/>
         <source>About program</source>
         <translation>О программе</translation>
     </message>
     <message>
-        <location filename="wmain.cpp" line="323"/>
+        <location filename="wmain.cpp" line="327"/>
         <source>Program calculates the values of compensations&apos;s possibilities of pipelines
 Version: 1.0
 Author: Ngo Gia Viet,
@@ -556,12 +561,12 @@ Author: Ngo Gia Viet,Postgraduate student of department &apos;Shipbuilding and M
 Аспирант кафедры «Судостроение и энергетические комплексы морской техники», ФГБОУ ВО «АГТУ»</translation>
     </message>
     <message>
-        <location filename="wmain.cpp" line="331"/>
+        <location filename="wmain.cpp" line="335"/>
         <source>Open</source>
         <translation>Окрыть</translation>
     </message>
     <message>
-        <location filename="wmain.cpp" line="378"/>
+        <location filename="wmain.cpp" line="382"/>
         <source>Import</source>
         <translation>Импортировать</translation>
     </message>

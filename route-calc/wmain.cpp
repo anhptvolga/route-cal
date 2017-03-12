@@ -35,7 +35,6 @@ WMain::WMain(QWidget *parent)
 	connect(ui.actionOpen, SIGNAL(triggered(bool)), this, SLOT(on_action_open()));
 	connect(ui.actionSave, SIGNAL(triggered(bool)), this, SLOT(on_action_save()));
 	connect(ui.actionImport, SIGNAL(triggered(bool)), this, SLOT(on_action_import()));
-	connect(ui.actionExit, SIGNAL(triggered(bool)), this, SLOT(on_action_exit()));
 
 	connect(ui.actionExit, SIGNAL(triggered()), qApp, SLOT(closeAllWindows()));
 }
@@ -226,9 +225,10 @@ void WMain::on_save_file_clicked()
 	Route* curroute = this->get_current_route();
 	if (curroute != nullptr)
 	{
-		QString filename = QFileDialog::getSaveFileName(this, tr("Save"));
+		QString filename = QFileDialog::getSaveFileName(this, tr("Save"), "",   tr("Text (*.txt)"));
 		if (!filename.isEmpty())
 		{
+			if (!filename.endsWith(".txt")) filename += ".txt";
 			curroute->write_detail_to_file(filename);
 			QMessageBox::information(this, tr("Saved"), tr("Successfully")+".");
 		}
