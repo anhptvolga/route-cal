@@ -160,7 +160,7 @@
     <message>
         <location filename="wmain.ui" line="389"/>
         <source>Note</source>
-        <translation></translation>
+        <translation>Примечание</translation>
     </message>
     <message>
         <location filename="wmain.ui" line="425"/>
@@ -276,108 +276,108 @@
         <translation>Русский</translation>
     </message>
     <message>
-        <location filename="route.cpp" line="215"/>
+        <location filename="route.cpp" line="216"/>
         <source>Number of lines</source>
         <translation>Количество прямых участков</translation>
     </message>
     <message>
-        <location filename="route.cpp" line="216"/>
-        <location filename="route.cpp" line="236"/>
+        <location filename="route.cpp" line="217"/>
         <location filename="route.cpp" line="237"/>
-        <location filename="route.cpp" line="240"/>
+        <location filename="route.cpp" line="238"/>
         <location filename="route.cpp" line="241"/>
         <location filename="route.cpp" line="242"/>
+        <location filename="route.cpp" line="243"/>
         <source>vector</source>
         <translation>вектор</translation>
     </message>
     <message>
-        <location filename="route.cpp" line="218"/>
+        <location filename="route.cpp" line="219"/>
         <source>Calculate vector</source>
         <translation>Вычисление векторов</translation>
     </message>
     <message>
-        <location filename="route.cpp" line="222"/>
-        <location filename="route.cpp" line="232"/>
+        <location filename="route.cpp" line="223"/>
         <location filename="route.cpp" line="233"/>
+        <location filename="route.cpp" line="234"/>
         <source>Points</source>
         <translation>Точки</translation>
     </message>
     <message>
-        <location filename="route.cpp" line="226"/>
+        <location filename="route.cpp" line="227"/>
         <source>Calculate parallel</source>
         <translation>Вычисление параллельных участков</translation>
     </message>
     <message>
-        <location filename="route.cpp" line="231"/>
+        <location filename="route.cpp" line="232"/>
         <source>Parallel</source>
         <translation>Параллельно</translation>
     </message>
     <message>
-        <location filename="route.cpp" line="246"/>
+        <location filename="route.cpp" line="247"/>
         <source>Rejected</source>
         <translation>Отказано</translation>
     </message>
     <message>
-        <location filename="route.cpp" line="253"/>
-        <location filename="route.cpp" line="271"/>
-        <location filename="route.cpp" line="289"/>
+        <location filename="route.cpp" line="254"/>
+        <location filename="route.cpp" line="272"/>
+        <location filename="route.cpp" line="290"/>
         <source>Max</source>
         <translation>Максимум</translation>
     </message>
     <message>
-        <location filename="route.cpp" line="261"/>
-        <location filename="route.cpp" line="279"/>
-        <location filename="route.cpp" line="297"/>
+        <location filename="route.cpp" line="262"/>
+        <location filename="route.cpp" line="280"/>
+        <location filename="route.cpp" line="298"/>
         <source>Min</source>
         <translation>Минимум</translation>
     </message>
     <message>
-        <location filename="route.cpp" line="311"/>
-        <location filename="route.cpp" line="316"/>
-        <location filename="route.cpp" line="330"/>
-        <location filename="route.cpp" line="335"/>
-        <location filename="route.cpp" line="349"/>
-        <location filename="route.cpp" line="354"/>
+        <location filename="route.cpp" line="312"/>
+        <location filename="route.cpp" line="317"/>
+        <location filename="route.cpp" line="331"/>
+        <location filename="route.cpp" line="336"/>
+        <location filename="route.cpp" line="350"/>
+        <location filename="route.cpp" line="355"/>
         <source>Field of compensations&apos; possibilities</source>
         <translation>Область компенсационных возможностей</translation>
-    </message>
-    <message>
-        <location filename="route.cpp" line="317"/>
-        <location filename="route.cpp" line="336"/>
-        <location filename="route.cpp" line="355"/>
-        <source>from</source>
-        <translation>от</translation>
     </message>
     <message>
         <location filename="route.cpp" line="318"/>
         <location filename="route.cpp" line="337"/>
         <location filename="route.cpp" line="356"/>
+        <source>from</source>
+        <translation>от</translation>
+    </message>
+    <message>
+        <location filename="route.cpp" line="319"/>
+        <location filename="route.cpp" line="338"/>
+        <location filename="route.cpp" line="357"/>
         <source>to</source>
         <translation>до</translation>
     </message>
     <message>
-        <location filename="route.cpp" line="322"/>
-        <location filename="route.cpp" line="324"/>
-        <location filename="route.cpp" line="341"/>
-        <location filename="route.cpp" line="343"/>
-        <location filename="route.cpp" line="360"/>
-        <location filename="route.cpp" line="362"/>
+        <location filename="route.cpp" line="323"/>
+        <location filename="route.cpp" line="325"/>
+        <location filename="route.cpp" line="342"/>
+        <location filename="route.cpp" line="344"/>
+        <location filename="route.cpp" line="361"/>
+        <location filename="route.cpp" line="363"/>
         <source>Note</source>
         <translation>Примечание</translation>
     </message>
     <message>
-        <location filename="route.cpp" line="322"/>
-        <location filename="route.cpp" line="341"/>
-        <location filename="route.cpp" line="360"/>
+        <location filename="route.cpp" line="323"/>
+        <location filename="route.cpp" line="342"/>
+        <location filename="route.cpp" line="361"/>
         <source>appoint overdimension</source>
         <translation>Назначить припуск</translation>
     </message>
     <message>
-        <location filename="route.cpp" line="324"/>
-        <location filename="route.cpp" line="343"/>
-        <location filename="route.cpp" line="362"/>
+        <location filename="route.cpp" line="325"/>
+        <location filename="route.cpp" line="344"/>
+        <location filename="route.cpp" line="363"/>
         <source>don&apos;t appoint overdimension</source>
-        <translation>Не надо назначить припуск</translation>
+        <translation>Не требуется припуск</translation>
     </message>
 </context>
 <context>
@@ -492,7 +492,7 @@
         <location filename="wmain.cpp" line="205"/>
         <location filename="wmain.cpp" line="210"/>
         <source>Don&apos;t appoint overdimension.</source>
-        <translation>Не надо назначить припуск.</translation>
+        <translation>Не требуется припуск.</translation>
     </message>
     <message>
         <location filename="wmain.cpp" line="216"/>
@@ -506,7 +506,7 @@
     </message>
     <message>
         <location filename="wmain.cpp" line="225"/>
-        <location filename="wmain.cpp" line="352"/>
+        <location filename="wmain.cpp" line="358"/>
         <source>Save</source>
         <translation>Сохранить</translation>
     </message>
@@ -531,27 +531,37 @@
         <translation>Номер точек свободного соединения (разделить по &apos;,&apos;):</translation>
     </message>
     <message>
-        <location filename="wmain.cpp" line="316"/>
+        <location filename="wmain.cpp" line="322"/>
         <source>About program</source>
         <translation>О программе</translation>
     </message>
     <message>
-        <location filename="wmain.cpp" line="317"/>
-        <source>Program calculates the values of compensations&apos;s possibilities of pipelines 
+        <location filename="wmain.cpp" line="323"/>
+        <source>Program calculates the values of compensations&apos;s possibilities of pipelines
 Version: 1.0
-Author: Ngo Gia Viet,Postgraduate student of department &apos;Shipbuilding and Marine Engineering Energy Complexes&apos;, ASTU</source>
+Author: Ngo Gia Viet,
+Postgraduate student of department &apos;Shipbuilding and Marine Engineering Energy Complexes&apos;, ASTU</source>
         <translation>Программа расчета области компенсационных возможностей трасс трубопроводов
 Версия: 1.0
 Автор: Нго Жа Вьет,
 Аспирант кафедры «Судостроение и энергетические комплексы морской техники», ФГБОУ ВО «АГТУ»</translation>
     </message>
     <message>
-        <location filename="wmain.cpp" line="325"/>
+        <source>Program calculates the values of compensations&apos;s possibilities of pipelines 
+Version: 1.0
+Author: Ngo Gia Viet,Postgraduate student of department &apos;Shipbuilding and Marine Engineering Energy Complexes&apos;, ASTU</source>
+        <translation type="vanished">Программа расчета области компенсационных возможностей трасс трубопроводов
+Версия: 1.0
+Автор: Нго Жа Вьет,
+Аспирант кафедры «Судостроение и энергетические комплексы морской техники», ФГБОУ ВО «АГТУ»</translation>
+    </message>
+    <message>
+        <location filename="wmain.cpp" line="331"/>
         <source>Open</source>
         <translation>Окрыть</translation>
     </message>
     <message>
-        <location filename="wmain.cpp" line="372"/>
+        <location filename="wmain.cpp" line="378"/>
         <source>Import</source>
         <translation>Импортировать</translation>
     </message>
