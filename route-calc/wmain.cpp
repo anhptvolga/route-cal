@@ -4,6 +4,12 @@ WMain::WMain(QWidget *parent)
 	: QMainWindow(parent)
 {
 	ui.setupUi(this);
+	ui.menubar->clear();
+	ui.menubar->addMenu(ui.menuFile);
+	ui.menuSetting->setVisible(false);
+	ui.menuAbout->setVisible(false);
+	ui.menubar->addAction(ui.actionSetting);
+	ui.menubar->addAction(ui.actionAbout);
 	if (Setting::Instance()->language() == "ru")
 	{
 		TranslatorManager::instance()->setTranslator(QString("ru"));
