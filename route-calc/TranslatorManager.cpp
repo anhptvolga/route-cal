@@ -2,7 +2,7 @@
 #include <QStringList>
 #include "TranslatorManager.h"
 
-TranslatorManager* TranslatorManager::m_Instance = 0;
+TranslatorManager* TranslatorManager::m_Instance = nullptr;
 
 TranslatorManager::TranslatorManager()
 {
