@@ -114,7 +114,7 @@ void Route::calcuate()
 
 inline double Route::f(double t, double u, double e)
 {
-	return sin(t)*u - (1-cos(t))*e;
+	return abs(sin(t))*u - (1-cos(t))*e;
 }
 
 void Route::calc_angle_t(int i, double t)
@@ -168,18 +168,24 @@ void Route::calc_max_min(int i)
 	// calculate in limits
 	calc_angle_t(i, Setting::Instance()->limit_angle());
 	calc_angle_t(i, -Setting::Instance()->limit_angle());
-	
+	double t = 0;
 	if (details[i].ve.get_x() != 0)
 	{
-		calc_angle_t(i, atan(details[i].vu.get_x() / details[i].ve.get_x()));
+		t = details[i].vu.get_x() / details[i].ve.get_x();
+		calc_angle_t(i, atan(t));
+		calc_angle_t(i, atan(-t));
 	}
 	if (details[i].ve.get_y() != 0)
 	{
-		calc_angle_t(i, atan(details[i].vu.get_y() / details[i].ve.get_y()));
+		t = details[i].vu.get_y() / details[i].ve.get_y();
+		calc_angle_t(i, atan(t));
+		calc_angle_t(i, atan(-t));
 	}
 	if (details[i].ve.get_z() != 0)
 	{
-		calc_angle_t(i, atan(details[i].vu.get_z() / details[i].ve.get_z()));
+		t = details[i].vu.get_z() / details[i].ve.get_z();
+		calc_angle_t(i, atan(t));
+		calc_angle_t(i, atan(-t));
 	}
 }
 
