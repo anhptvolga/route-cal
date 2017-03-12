@@ -2,7 +2,10 @@
 #define __SETTING_H__
 
 #include <QString>
+#include <QFile>
+#include <QTextStream>
 
+#define CONFIG_FILENAME "config.conf"
 #define ESP 0.00000000001
 #define PI 3.14159265358979323846264338
 #define RadToDeg(x) ((x * 180) / 3.14159265358979323846264338)
@@ -33,6 +36,9 @@ public:
 
 	void set_language(QString lang);
 	QString language();
+
+	void write_to_file();
+	void read_from_file();
 	
 private:
 	Setting();

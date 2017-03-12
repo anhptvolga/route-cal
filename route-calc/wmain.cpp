@@ -4,7 +4,11 @@ WMain::WMain(QWidget *parent)
 	: QMainWindow(parent)
 {
 	ui.setupUi(this);
-	
+	if (Setting::Instance()->language() == "ru")
+	{
+		TranslatorManager::instance()->setTranslator(QString("ru"));
+		ui.retranslateUi(this);
+	}
 	//////////////////////////////////////////////////////////////////////////
 	// connect signals and slots
 	connect(ui.bt_add_project, SIGNAL(clicked()), this, SLOT(on_add_project_clicked()));

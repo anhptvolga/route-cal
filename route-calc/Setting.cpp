@@ -67,3 +67,29 @@ QString Setting::language()
 {
 	return value_language;
 }
+
+void Setting::write_to_file()
+{
+	QFile file(CONFIG_FILENAME);
+	if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+		return;
+	QTextStream out(&file);
+	out << this->value_author << endl;
+	out << this->value_accuracy << endl;
+	out << this->value_limit_angle << endl;
+	out << this->value_language << endl;
+	file.close();
+}
+
+void Setting::read_from_file()
+{
+	QFile file(CONFIG_FILENAME);
+	if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+		return;
+	QTextStream in(&file);
+	this->value_author = in.readLine();
+	in >> this->value_accuracy;
+	in >> this->value_limit_angle;
+	in >> this->value_language;
+	file.close();
+}
