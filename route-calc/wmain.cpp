@@ -189,23 +189,23 @@ void WMain::on_calc_clicked()
 					min_sz = curr->get_min_sz();
 			
 			ui.field_ox->setText((abs(max_sx) < 0.00000001 && abs(min_sx) < 0.00000001) ? "0" :
-				tr("From") + " " + QString::number(min_sx) + " " + tr("To") + " " + QString::number(max_sx));
+				tr("From") + " " + QString::number(min_sx, 'f', Setting::Instance()->accuracy()) + " " + tr("To") + " " + QString::number(max_sx, 'f', Setting::Instance()->accuracy()));
 			ui.field_oy->setText((abs(max_sy) < 0.00000001 && abs(min_sy) < 0.00000001) ? "0" :
-				tr("From") + " " + QString::number(min_sy) + " " + tr("To") + " " + QString::number(max_sy));
+				tr("From") + " " + QString::number(min_sy, 'f', Setting::Instance()->accuracy()) + " " + tr("To") + " " + QString::number(max_sy, 'f', Setting::Instance()->accuracy()));
 			ui.field_oz->setText((abs(max_sz) < 0.00000001 && abs(min_sz) < 0.00000001) ? "0" :
-				tr("From") + " " + QString::number(min_sz) + " " + tr("To") + " " + QString::number(max_sz));
+				tr("From") + " " + QString::number(min_sz, 'f', Setting::Instance()->accuracy()) + " " + tr("To") + " " + QString::number(max_sz, 'f', Setting::Instance()->accuracy()));
 			if (100 - min(max_sx, abs(min_sx)) > 0) { 
-				ui.note_ox->setText(tr("Appoint overdimension: ") + QString::fromWCharArray(L"\u2206") + "L = " + QString::number(100 - min(max_sx, abs(min_sx))));
+				ui.note_ox->setText(tr("Appoint overdimension: ") + QString::fromWCharArray(L"\u2206") + "L = " + QString::number(100 - min(max_sx, abs(min_sx)), 'f', Setting::Instance()->accuracy()));
 			} else {
 				ui.note_ox->setText(tr("Don\'t appoint overdimension."));
 			}
 			if (100 - min(max_sy, abs(min_sy)) > 0) { 
-				ui.note_oy->setText(tr("Appoint overdimension: ") + QString::fromWCharArray(L"\u2206") + "L = " + QString::number(100 - min(max_sy, abs(min_sy))));
+				ui.note_oy->setText(tr("Appoint overdimension: ") + QString::fromWCharArray(L"\u2206") + "L = " + QString::number(100 - min(max_sy, abs(min_sy)), 'f', Setting::Instance()->accuracy()));
 			} else {
 				ui.note_oy->setText(tr("Don\'t appoint overdimension."));
 			}
 			if (100 - min(max_sz, abs(min_sz)) > 0) { 
-				ui.note_oz->setText(tr("Appoint overdimension: ") + QString::fromWCharArray(L"\u2206") + "L = " + QString::number(100 - min(max_sz, abs(min_sz))));
+				ui.note_oz->setText(tr("Appoint overdimension: ") + QString::fromWCharArray(L"\u2206") + "L = " + QString::number(100 - min(max_sz, abs(min_sz)), 'f', Setting::Instance()->accuracy()));
 			} else {
 				ui.note_oz->setText(tr("Don\'t appoint overdimension."));
 			}
@@ -309,13 +309,18 @@ void WMain::on_setting_triggered()
 	SettingDialog st(this);
 	st.exec();
 	ui.retranslateUi(this);
+	Route* rt = this->get_current_route();
+	if (rt != nullptr)
+	{
+		ui.number_of_straight_sections->setText(QString::number(rt->count_number_of_straight_sections()));
+	}
 }
 
 void WMain::on_about_triggered()
 {
 	QMessageBox msgBox;
 	QString about = tr("About program") + "\n";
-	about += tr("Program calculates the values of compensations\'s possibilities of pipelines \nVersion: 1.0\nAuthor: Ngo Gia Viet,\n\
+	about += tr("Program calculates the values of compensations\'s possibilities of pipelines\nVersion: 1.0\nAuthor: Ngo Gia Viet,\n\
 Postgraduate student of department \'Shipbuilding and Marine Engineering Energy Complexes\', ASTU");
 	msgBox.setText(about);
 	msgBox.exec();
