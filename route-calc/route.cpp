@@ -211,7 +211,8 @@ void Route::write_detail_to_file(QString filename)
 	if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
 		return;
 	QTextStream out(&file);
-
+	out.setRealNumberPrecision(Setting::Instance()->accuracy());
+	out.setRealNumberNotation(QTextStream::FixedNotation);
 	out << SettingDialog::tr("Number of lines") << ": " << this->points.count() - 1 << endl;
 	out << SettingDialog::tr("vector") << "12: " << vtsafter[0].to_string() << endl;
 	out << "------------------------------" << endl;
@@ -255,7 +256,7 @@ void Route::write_detail_to_file(QString filename)
 		//{
 			for (int i = 0; i < details.count(); ++i)
 			{
-				if (abs(details[i].R) > 0.0000001) out << "		t" << i+1 << " = " << details[i].tmax_x << endl;
+				if (abs(details[i].R) > 0.0000001) out << "		t" << i+1 << " = " << RadToDeg(details[i].tmax_x) << endl;
 			}
 		//}
 		out << "	" << SettingDialog::tr("Min") << ": " << this->min_sx << endl;
@@ -263,7 +264,7 @@ void Route::write_detail_to_file(QString filename)
 		//{
 			for (int i = 0; i < details.count(); ++i)
 			{
-				if (abs(details[i].R) > 0.0000001) out << "		t" << i+1 << " = " << details[i].tmin_x << endl;
+				if (abs(details[i].R) > 0.0000001) out << "		t" << i+1 << " = " << RadToDeg(details[i].tmin_x) << endl;
 			}
 		//}
 		//--------
@@ -273,7 +274,7 @@ void Route::write_detail_to_file(QString filename)
 		//{
 			for (int i = 0; i < details.count(); ++i)
 			{
-				if (abs(details[i].R) > 0.0000001) out << "		t" << i+1 << " = " << details[i].tmax_y << endl;
+				if (abs(details[i].R) > 0.0000001) out << "		t" << i+1 << " = " << RadToDeg(details[i].tmax_y) << endl;
 			}
 		//}
 		out << "	" << SettingDialog::tr("Min") << ": " << this->min_sy << endl;
@@ -281,7 +282,7 @@ void Route::write_detail_to_file(QString filename)
 		//{
 			for (int i = 0; i < details.count(); ++i)
 			{
-				if (abs(details[i].R) > 0.0000001) out << "		t" << i+1 << " = " << details[i].tmin_y << endl;
+				if (abs(details[i].R) > 0.0000001) out << "		t" << i+1 << " = " << RadToDeg(details[i].tmin_y) << endl;
 			}
 		//}
 		
@@ -291,7 +292,7 @@ void Route::write_detail_to_file(QString filename)
 		//{
 			for (int i = 0; i < details.count(); ++i)
 			{
-				if (abs(details[i].R) > 0.0000001) out << "		t" << i+1 << " = " << details[i].tmax_z << endl;
+				if (abs(details[i].R) > 0.0000001) out << "		t" << i+1 << " = " << RadToDeg(details[i].tmax_z) << endl;
 			}
 		//}
 		out << "	" << SettingDialog::tr("Min") << ": " << this->min_sz << endl;
@@ -299,7 +300,7 @@ void Route::write_detail_to_file(QString filename)
 		//{
 			for (int i = 0; i < details.count(); ++i)
 			{
-				if (abs(details[i].R) > 0.0000001) out << "		t" << i+1 << " = " << details[i].tmin_z << endl;
+				if (abs(details[i].R) > 0.0000001) out << "		t" << i+1 << " = " << RadToDeg(details[i].tmin_z) << endl;
 			}
 		//}
 		//////////////////////////////////////////////////////////////////////////
