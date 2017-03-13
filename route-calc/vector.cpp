@@ -46,7 +46,7 @@ double Vector::get_z()
 bool Vector::is_parallel(Vector other)
 {
 	double cosalpha = (this->x * other.x + this->y * other.y + this->z * other.z) / (this->get_len() * other.get_len());
-	return abs(1 - abs(cosalpha)) < 0.0000001;
+	return abs(1 - abs(cosalpha)) < ESP;
 }
 
 double Vector::get_len()
