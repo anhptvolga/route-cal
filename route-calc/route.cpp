@@ -102,7 +102,8 @@ void Route::calcuate()
 				this->max_sy += details[i].R * details[i].max_sy;
 				this->max_sz += details[i].R * details[i].max_sz;
 				this->min_sx += details[i].R * details[i].min_sx;
-				this->min_sz += details[i].R * details[i].min_sx;
+				this->min_sy += details[i].R * details[i].min_sy;
+				this->min_sz += details[i].R * details[i].min_sz;
 			}
 		}
 	}
@@ -114,7 +115,7 @@ void Route::calcuate()
 
 inline double Route::f(double t, double u, double e)
 {
-	return abs(sin(t))*u - (1-cos(t))*e;
+	return sin(t)*u - (1-cos(t))*e;
 }
 
 void Route::calc_angle_t(int i, double t)
@@ -168,6 +169,7 @@ void Route::calc_max_min(int i)
 	// calculate in limits
 	calc_angle_t(i, Setting::Instance()->limit_angle());
 	calc_angle_t(i, -Setting::Instance()->limit_angle());
+	calc_angle_t(i, 0);
 	double t = 0;
 	if (details[i].ve.get_x() != 0)
 	{
@@ -219,6 +221,8 @@ void Route::write_detail_to_file(QString filename)
 	QTextStream out(&file);
 	out.setRealNumberPrecision(Setting::Instance()->accuracy());
 	out.setRealNumberNotation(QTextStream::FixedNotation);
+	QString author = Setting::Instance()->author();
+	if (!author.isEmpty()) out << SettingDialog::tr("Author of project") << ": " << author << endl;
 	out << SettingDialog::tr("Number of lines") << ": " << this->points.count() - 1 << endl;
 	out << SettingDialog::tr("vector") << "12: " << vtsafter[0].to_string() << endl;
 	out << "------------------------------" << endl;
@@ -325,8 +329,8 @@ void Route::write_detail_to_file(QString filename)
 				<< " " << SettingDialog::tr("to") << " " << this->max_sx << endl;
 		}
 
-		if (100 - min(max_sx, abs(min_sx)) > 0) { 
-			out << "	" << SettingDialog::tr("Note") << ": " << SettingDialog::tr("appoint overdimension") << ": delta_L = " << 100 - min(max_sx, abs(min_sx)) << endl;
+		if (100 - min(abs(max_sx), abs(min_sx)) > 0) { 
+			out << "	" << SettingDialog::tr("Note") << ": " << SettingDialog::tr("appoint overdimension") << ": delta_L = " << 100 - min(abs(max_sx), abs(min_sx)) << endl;
 		} else {
 			out << "	" << SettingDialog::tr("Note") << ": " << SettingDialog::tr("don\'t appoint overdimension") << "." << endl;
 		}
@@ -344,8 +348,8 @@ void Route::write_detail_to_file(QString filename)
 				<< " " << SettingDialog::tr("to") << " " << this->max_sy << endl;
 		}
 
-		if (100 - min(max_sy, abs(min_sy)) > 0) { 
-			out << "	" << SettingDialog::tr("Note") << ": " << SettingDialog::tr("appoint overdimension") << ": delta_L = " << 100 - min(max_sy, abs(min_sy)) << endl;
+		if (100 - min(abs(max_sy), abs(min_sy)) > 0) { 
+			out << "	" << SettingDialog::tr("Note") << ": " << SettingDialog::tr("appoint overdimension") << ": delta_L = " << 100 - min(abs(max_sy), abs(min_sy)) << endl;
 		} else {
 			out << "	" << SettingDialog::tr("Note") << ": " << SettingDialog::tr("don\'t appoint overdimension") << "." << endl;
 		}
@@ -363,8 +367,8 @@ void Route::write_detail_to_file(QString filename)
 				<< " " << SettingDialog::tr("to") << " " << this->max_sz << endl;
 		}
 
-		if (100 - min(max_sz, abs(min_sz)) > 0) { 
-			out << "	" << SettingDialog::tr("Note") << ": " << SettingDialog::tr("appoint overdimension") << ": delta_L = " << 100 - min(max_sz, abs(min_sz)) << endl;
+		if (100 - min(abs(max_sz), abs(min_sz)) > 0) { 
+			out << "	" << SettingDialog::tr("Note") << ": " << SettingDialog::tr("appoint overdimension") << ": delta_L = " << 100 - min(abs(max_sz), abs(min_sz)) << endl;
 		} else {
 			out << "	" << SettingDialog::tr("Note") << ": " << SettingDialog::tr("don\'t appoint overdimension") << "." << endl;
 		}
