@@ -57,7 +57,7 @@
      <item row="0" column="1" colspan="2">
       <widget class="QLineEdit" name="le_author">
        <property name="text">
-        <string>author</string>
+        <string/>
        </property>
       </widget>
      </item>
