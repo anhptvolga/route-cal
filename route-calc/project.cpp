@@ -54,8 +54,11 @@ void Project::load_from_stream(QTextStream& in)
 	QString tmp;
 	int size, i;
 	
-	in >> tmp;
+	tmp = in.readLine();
+	if (tmp.isEmpty()) tmp = in.readLine();
 	this->name = tmp.trimmed();
+	tmp = in.readLine();
+	this->value_author = tmp.trimmed();
 	
 	in >> size;
 	this->routes.clear();
@@ -69,6 +72,7 @@ void Project::load_from_stream(QTextStream& in)
 void Project::save_to_stream(QTextStream& out)
 {
 	out << name << endl;
+	out << value_author << endl;
 	out << routes.count() << endl;
 	for (int i = 0; i < routes.count(); ++i)
 	{
@@ -79,4 +83,14 @@ void Project::save_to_stream(QTextStream& out)
 QString Project::get_name()
 {
 	return this->name;
+}
+
+void Project::set_author(QString value)
+{
+	this->value_author = value;
+}
+
+QString Project::author()
+{
+	return this->value_author;
 }

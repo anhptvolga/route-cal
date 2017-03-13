@@ -24,12 +24,19 @@ public:
 	QStringList get_routes_name();
 	Route* get_proute(int index);
 
+	/**
+	 * author attribute 
+	 */
+	void set_author(QString value);
+	QString author();
+
 	//--- saving and loading methods
 	void load_from_stream(QTextStream& in);
 	void save_to_stream(QTextStream& out);
 
 private:
 	QString name;
+	QString value_author;
 	QVector<Route> routes;
 };
 
