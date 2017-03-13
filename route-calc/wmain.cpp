@@ -197,11 +197,11 @@ void WMain::on_calc_clicked()
 					min_sy = curr->get_min_sy(),
 					min_sz = curr->get_min_sz();
 			
-			ui.field_ox->setText((abs(max_sx) < 0.00000001 && abs(min_sx) < 0.00000001) ? "0" :
+			ui.field_ox->setText((abs(max_sx) < ESP && abs(min_sx) < ESP) ? "0" :
 				tr("From") + " " + QString::number(min_sx, 'f', Setting::Instance()->accuracy()) + " " + tr("To") + " " + QString::number(max_sx, 'f', Setting::Instance()->accuracy()));
-			ui.field_oy->setText((abs(max_sy) < 0.00000001 && abs(min_sy) < 0.00000001) ? "0" :
+			ui.field_oy->setText((abs(max_sy) < ESP && abs(min_sy) < ESP) ? "0" :
 				tr("From") + " " + QString::number(min_sy, 'f', Setting::Instance()->accuracy()) + " " + tr("To") + " " + QString::number(max_sy, 'f', Setting::Instance()->accuracy()));
-			ui.field_oz->setText((abs(max_sz) < 0.00000001 && abs(min_sz) < 0.00000001) ? "0" :
+			ui.field_oz->setText((abs(max_sz) < ESP && abs(min_sz) < ESP) ? "0" :
 				tr("From") + " " + QString::number(min_sz, 'f', Setting::Instance()->accuracy()) + " " + tr("To") + " " + QString::number(max_sz, 'f', Setting::Instance()->accuracy()));
 			if (100 - min(abs(max_sx), abs(min_sx)) > 0) { 
 				ui.note_ox->setText(tr("Appoint overdimension: ") + QString::fromWCharArray(L"\u2206") + "L = " + QString::number(100 - min(abs(max_sx), abs(min_sx)), 'f', Setting::Instance()->accuracy()));

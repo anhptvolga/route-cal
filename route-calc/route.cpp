@@ -94,7 +94,7 @@ void Route::calcuate()
 		this->min_sx = this->min_sy = this->min_sz = 0;
 		for (int i = 0; i < details.count(); ++i)
 		{
-			if (abs(details[i].R) > 0.000000000001)
+			if (abs(details[i].R) > ESP)
 			{
 				this->isHasParallel = true;
 				calc_max_min(i);
@@ -242,7 +242,7 @@ void Route::write_detail_to_file(QString filename)
 		out << SettingDialog::tr("Parallel") + ": " << details[k].i +1 << ", " << details[k].j+1
 			<< " " << SettingDialog::tr("Points") << ": (" << (details[k].i == 0 ? 1 : free_indexs[details[k].i-1]) << "; " << (details[k].i == 0 ? 2 : free_indexs[details[k].i-1]+1) << ") "
 			<< " " << SettingDialog::tr("Points") << ": (" << (details[k].j == 0 ? 1 : free_indexs[details[k].j-1]) << "; " << (details[k].j == 0 ? 2 : free_indexs[details[k].j-1]+1) << ")" << endl;
-		if (abs(details[k].R) > 0.0000000000001)
+		if (abs(details[k].R) > ESP)
 		{
 			out << "	" << SettingDialog::tr("vector") << " n: " << details[k].vn.to_string() << endl;
 			out << "	" << SettingDialog::tr("vector") << " delta_T: " << details[k].delta_T.to_string() << endl;
@@ -262,61 +262,61 @@ void Route::write_detail_to_file(QString filename)
 		out << "---------- 6 ------------" << endl;
 		out << "Ox: " << endl
 			<< "	" << SettingDialog::tr("Max") << ": " << this->max_sx << endl;
-		//if (abs(max_sx)-0 > 0.0000000001)
+		//if (abs(max_sx)-0 > ESP)
 		//{
 			for (int i = 0; i < details.count(); ++i)
 			{
-				if (abs(details[i].R) > 0.0000001) out << "		t" << i+1 << " = " << RadToDeg(details[i].tmax_x) << endl;
+				if (abs(details[i].R) > ESP) out << "		t" << i+1 << " = " << RadToDeg(details[i].tmax_x) << endl;
 			}
 		//}
 		out << "	" << SettingDialog::tr("Min") << ": " << this->min_sx << endl;
-		//if (abs(min_sx)-0 > 0.0000000001)
+		//if (abs(min_sx)-0 > ESP)
 		//{
 			for (int i = 0; i < details.count(); ++i)
 			{
-				if (abs(details[i].R) > 0.0000001) out << "		t" << i+1 << " = " << RadToDeg(details[i].tmin_x) << endl;
+				if (abs(details[i].R) > ESP) out << "		t" << i+1 << " = " << RadToDeg(details[i].tmin_x) << endl;
 			}
 		//}
 		//--------
 		out << "Oy: " << endl
 			<< "	" << SettingDialog::tr("Max") << ": " << this->max_sy << endl;
-		//if (abs(max_sy)-0 > 0.0000000001)
+		//if (abs(max_sy)-0 > ESP)
 		//{
 			for (int i = 0; i < details.count(); ++i)
 			{
-				if (abs(details[i].R) > 0.0000001) out << "		t" << i+1 << " = " << RadToDeg(details[i].tmax_y) << endl;
+				if (abs(details[i].R) > ESP) out << "		t" << i+1 << " = " << RadToDeg(details[i].tmax_y) << endl;
 			}
 		//}
 		out << "	" << SettingDialog::tr("Min") << ": " << this->min_sy << endl;
-		//if (abs(min_sy)-0 > 0.0000000001)
+		//if (abs(min_sy)-0 > ESP)
 		//{
 			for (int i = 0; i < details.count(); ++i)
 			{
-				if (abs(details[i].R) > 0.0000001) out << "		t" << i+1 << " = " << RadToDeg(details[i].tmin_y) << endl;
+				if (abs(details[i].R) > ESP) out << "		t" << i+1 << " = " << RadToDeg(details[i].tmin_y) << endl;
 			}
 		//}
 		
 		out << "Oz: " << endl
 			<< "	" << SettingDialog::tr("Max") << ": " << this->max_sz << endl;
-		//if (abs(max_sz)-0 > 0.0000000001)
+		//if (abs(max_sz)-0 > ESP)
 		//{
 			for (int i = 0; i < details.count(); ++i)
 			{
-				if (abs(details[i].R) > 0.0000001) out << "		t" << i+1 << " = " << RadToDeg(details[i].tmax_z) << endl;
+				if (abs(details[i].R) > ESP) out << "		t" << i+1 << " = " << RadToDeg(details[i].tmax_z) << endl;
 			}
 		//}
 		out << "	" << SettingDialog::tr("Min") << ": " << this->min_sz << endl;
-		//if (abs(min_sz)-0 > 0.0000000001)
+		//if (abs(min_sz)-0 > ESP)
 		//{
 			for (int i = 0; i < details.count(); ++i)
 			{
-				if (abs(details[i].R) > 0.0000001) out << "		t" << i+1 << " = " << RadToDeg(details[i].tmin_z) << endl;
+				if (abs(details[i].R) > ESP) out << "		t" << i+1 << " = " << RadToDeg(details[i].tmin_z) << endl;
 			}
 		//}
 		//////////////////////////////////////////////////////////////////////////
 		// 7.
 		out << "---------- 7 ------------" << endl;
-		if (abs(this->max_sx) < 0.0000000001 && abs(this->min_sx) < 0.0000000001) 
+		if (abs(this->max_sx) < ESP && abs(this->min_sx) < ESP) 
 		{
 			out << "Ox: "
 				<< "	" << SettingDialog::tr("Field of compensations\' possibilities") << ": 0" << endl;
@@ -335,7 +335,7 @@ void Route::write_detail_to_file(QString filename)
 			out << "	" << SettingDialog::tr("Note") << ": " << SettingDialog::tr("don\'t appoint overdimension") << "." << endl;
 		}
 		//----------
-		if (abs(max_sy) < 0.0000000001 && abs(min_sy) < 0.0000000001) 
+		if (abs(max_sy) < ESP && abs(min_sy) < ESP) 
 		{
 			out << "Oy: "
 				<< "	" << SettingDialog::tr("Field of compensations\' possibilities") << ": 0" << endl;
@@ -354,7 +354,7 @@ void Route::write_detail_to_file(QString filename)
 			out << "	" << SettingDialog::tr("Note") << ": " << SettingDialog::tr("don\'t appoint overdimension") << "." << endl;
 		}
 		//----------
-		if (abs(max_sz) < 0.0000000001 && abs(min_sz) < 0.0000000001) 
+		if (abs(max_sz) < ESP && abs(min_sz) < ESP) 
 		{
 			out << "Oz: "
 				<< "	" << SettingDialog::tr("Field of compensations\' possibilities") << ": 0" << endl;
@@ -432,7 +432,7 @@ int Route::count_parrallel_pairs()
 	int res = 0;
 	for (int i = 0; i < details.count(); ++i)
 	{
-		if (abs(details[i].R) > 0.0000000001) ++res;
+		if (abs(details[i].R) > ESP) ++res;
 	}
 	return res;
 }
