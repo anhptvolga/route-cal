@@ -1,11 +1,13 @@
 #if 0
 
 #include <stdlib.h>
+#include <iostream>
 #include <QVector>
 #include "Setting.h"
 #include "route.h"
 #include "point.h"
 #include "vector.h"
+using namespace std;
 
 
 void test1()
@@ -160,12 +162,14 @@ void test4()
 int main() 
 {
 	Setting::Instance()->set_accuracy(2);
-	Setting::Instance()->set_limit_angle(15 * 3.14 / 180);
-	test1();
-	test2();
+	Setting::Instance()->set_limit_angle(15 * 3.14159265358979323846264338 / 180);
+	
+	//test1();
+	//test2();
 	test3();
-	test4();
-	// system("pause");
+	//test4();
+
+	system("pause");
 }
 
 #endif

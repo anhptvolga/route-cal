@@ -1,4 +1,4 @@
-{{NO_DEPENDENCIES}}
+//{{NO_DEPENDENCIES}}
 // Microsoft Visual C++ generated include file.
 // Used by route-calc.rc
 
@@ -10,7 +10,8 @@
 #define _APS_NEXT_COMMAND_VALUE         40001
 #define _APS_NEXT_CONTROL_VALUE         1001
 #define _APS_NEXT_SYMED_VALUE           101
+#endif
+#endif
+
 #define WINVER 0x0501
 #define _WIN32_WINNT 0x0501
-#endif
-#endif
