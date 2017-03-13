@@ -236,9 +236,9 @@ void Route::write_detail_to_file(QString filename)
 	out << "------------------------------" << endl;
 	out << "4. " + SettingDialog::tr("Calculate parallel") << endl;
 
+	int count = 1;
 	for (int k = 0; k < this->details.count(); ++k)
-	{
-							
+	{			
 		out << SettingDialog::tr("Parallel") + ": " << details[k].i +1 << ", " << details[k].j+1
 			<< " " << SettingDialog::tr("Points") << ": (" << (details[k].i == 0 ? 1 : free_indexs[details[k].i-1]) << "; " << (details[k].i == 0 ? 2 : free_indexs[details[k].i-1]+1) << ") "
 			<< " " << SettingDialog::tr("Points") << ": (" << (details[k].j == 0 ? 1 : free_indexs[details[k].j-1]) << "; " << (details[k].j == 0 ? 2 : free_indexs[details[k].j-1]+1) << ")" << endl;
@@ -246,11 +246,12 @@ void Route::write_detail_to_file(QString filename)
 		{
 			out << "	" << SettingDialog::tr("vector") << " n: " << details[k].vn.to_string() << endl;
 			out << "	" << SettingDialog::tr("vector") << " delta_T: " << details[k].delta_T.to_string() << endl;
-			out << "	L1 = " << details[k].L << endl;
-			out << "	R1 = " << details[k].R << endl;
-			out << "	" << SettingDialog::tr("vector") << " R: " << details[k].vR.to_string() << endl;
+			out << "	L" << count << " = " << details[k].L << endl;
+			out << "	R" << count << " = " << details[k].R << endl;
+			out << "	" << SettingDialog::tr("vector") << " R" << count << ": " << details[k].vR.to_string() << endl;
 			out << "	" << SettingDialog::tr("vector") << " e: " << details[k].ve.to_string() << endl;
 			out << "	" << SettingDialog::tr("vector") << " u: " << details[k].vu.to_string() << endl;
+			++count;
 		}
 		else
 		{
