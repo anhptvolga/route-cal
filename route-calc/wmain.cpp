@@ -203,18 +203,18 @@ void WMain::on_calc_clicked()
 				tr("From") + " " + QString::number(min_sy, 'f', Setting::Instance()->accuracy()) + " " + tr("To") + " " + QString::number(max_sy, 'f', Setting::Instance()->accuracy()));
 			ui.field_oz->setText((abs(max_sz) < 0.00000001 && abs(min_sz) < 0.00000001) ? "0" :
 				tr("From") + " " + QString::number(min_sz, 'f', Setting::Instance()->accuracy()) + " " + tr("To") + " " + QString::number(max_sz, 'f', Setting::Instance()->accuracy()));
-			if (100 - min(max_sx, abs(min_sx)) > 0) { 
-				ui.note_ox->setText(tr("Appoint overdimension: ") + QString::fromWCharArray(L"\u2206") + "L = " + QString::number(100 - min(max_sx, abs(min_sx)), 'f', Setting::Instance()->accuracy()));
+			if (100 - min(abs(max_sx), abs(min_sx)) > 0) { 
+				ui.note_ox->setText(tr("Appoint overdimension: ") + QString::fromWCharArray(L"\u2206") + "L = " + QString::number(100 - min(abs(max_sx), abs(min_sx)), 'f', Setting::Instance()->accuracy()));
 			} else {
 				ui.note_ox->setText(tr("Don\'t appoint overdimension."));
 			}
-			if (100 - min(max_sy, abs(min_sy)) > 0) { 
-				ui.note_oy->setText(tr("Appoint overdimension: ") + QString::fromWCharArray(L"\u2206") + "L = " + QString::number(100 - min(max_sy, abs(min_sy)), 'f', Setting::Instance()->accuracy()));
+			if (100 - min(abs(max_sy), abs(min_sy)) > 0) { 
+				ui.note_oy->setText(tr("Appoint overdimension: ") + QString::fromWCharArray(L"\u2206") + "L = " + QString::number(100 - min(abs(max_sy), abs(min_sy)), 'f', Setting::Instance()->accuracy()));
 			} else {
 				ui.note_oy->setText(tr("Don\'t appoint overdimension."));
 			}
-			if (100 - min(max_sz, abs(min_sz)) > 0) { 
-				ui.note_oz->setText(tr("Appoint overdimension: ") + QString::fromWCharArray(L"\u2206") + "L = " + QString::number(100 - min(max_sz, abs(min_sz)), 'f', Setting::Instance()->accuracy()));
+			if (100 - min(abs(max_sz), abs(min_sz)) > 0) { 
+				ui.note_oz->setText(tr("Appoint overdimension: ") + QString::fromWCharArray(L"\u2206") + "L = " + QString::number(100 - min(abs(max_sz), abs(min_sz)), 'f', Setting::Instance()->accuracy()));
 			} else {
 				ui.note_oz->setText(tr("Don\'t appoint overdimension."));
 			}
@@ -311,7 +311,10 @@ void WMain::on_current_project_changed()
 	this->ui.cb_routes->clear();
 	Project *prj = this->get_current_project();
 	if (prj != nullptr)
+	{
 		this->ui.cb_routes->addItems(prj->get_routes_name());
+		Setting::Instance()->set_author(prj->author());
+	}
 }
 
 void WMain::on_setting_triggered()
